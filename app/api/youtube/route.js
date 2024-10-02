@@ -19,6 +19,7 @@ export async function GET(request) {
             throw new Error('Failed to fetch videos');
         }
 
+
         const data = await response.json();
         return NextResponse.json(data.items); // Return the fetched video items
     } catch (error) {
