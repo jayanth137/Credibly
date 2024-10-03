@@ -38,7 +38,7 @@ async function getPlaylistVideos(playlistId: string) {
     const data = await resp.json()
     // console.log(data)
     if (data.error) {
-        throw new Error(JSON.stringify({ error: true, msg: "Either you have no public videos or your channel is not accessible." }))
+        throw new Error("Either you have no public videos or your channel is not accessible.")
     }
     return data.items
 }
