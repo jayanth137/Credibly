@@ -8,7 +8,10 @@ export const options: NextAuthOptions = {
             clientSecret: "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",
             authorization: {
                 params: {
-                    scope: 'openid profile email https://www.googleapis.com/auth/youtube.readonly',
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code",
+                    scope: 'openid profile email https://www.googleapis.com/auth/youtube.readonly'
                 },
             },
         }),
@@ -24,7 +27,7 @@ export const options: NextAuthOptions = {
         async session({ session, token }) {
             // console.log('Session callback:', { session, token });
 
-            session.accessToken = token.accessToken;
+            (session as any).accessToken = token.accessToken;
             return session;
         },
     },
