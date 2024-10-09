@@ -36,6 +36,13 @@ function Create({ setCreated }) {
             fetchData()
         }
     }, [session, status]);
+
+    useEffect(() => {
+        setSelected(undefined)
+    }, [category])
+    // useEffect(() => {
+    //     console.log(selected)
+    // }, [selected])
     async function fetchData() {
         const resp = await fetch('/api/youtube/getVideos', {
             headers: {
@@ -53,6 +60,7 @@ function Create({ setCreated }) {
         }
         else {
             setData(respJson)
+            // setSelected(respJson.videos[0])
         }
         // console.log(data)
     }
@@ -61,6 +69,7 @@ function Create({ setCreated }) {
     }
 
     async function submitForm() {
+        console.log(selected)
         if (category == 'playlists') {
             dispatch(setDataFromPlaylist({ playlist: selected, tags: tags }))
         }
@@ -133,7 +142,10 @@ function Create({ setCreated }) {
                         {
                             category == 'videos' &&
                             <Select onValueChange={(val) => {
-                                setSelected(data.videos[parseInt(val)])
+                                const value = parseInt(val)
+                                console.log(value)
+                                console.log(data.videos[value])
+                                setSelected(data.videos[value])
                                 console.log(selected)
                             }}>
                                 <SelectTrigger className="w-full mt-1 bg-[#3a3b6b]/50 border-[#4a4b7b]">
@@ -149,6 +161,26 @@ function Create({ setCreated }) {
                                 </SelectContent>
                             </Select>
                         }
+                        {/* <Select onValueChange={(val) => {
+                            const value = parseInt(val)
+                            const selectedValue = data[category][value]
+                            console.log(selectedValue)
+                            console.log(selectedValue)
+                            setSelected(selectedValue)
+                            console.log(selected)
+                        }}>
+                            <SelectTrigger className="w-full mt-1 bg-[#3a3b6b]/50 border-[#4a4b7b]">
+                                <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent >
+                                {
+                                    data &&
+                                    data[category].map((item, idx) => {
+                                        return <SelectItem key={idx} value={idx.toString()} >{item.snippet.title}</SelectItem>
+                                    })
+                                }
+                            </SelectContent>
+                        </Select> */}
                     </div>
                     <div>
                         <Label htmlFor="title">Enter Title</Label>

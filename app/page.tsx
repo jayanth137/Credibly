@@ -58,11 +58,11 @@ export default function Component() {
             Watch, Pausss, and Mint<br />Your Success
           </h2>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4">
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-6 py-4 rounded-full">
+            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-6 py-4 rounded-2xl">
               Mint Certificate
             </Button>
             <Link href={'/login'} >
-              <Button variant="outline" className="border-white hover:bg-white/10 text-lg px-6 py-4 rounded-full">
+              <Button variant="outline" className="border-white hover:bg-white/10 text-lg px-6 py-4 rounded-2xl">
                 Join as a creator
               </Button>
             </Link>

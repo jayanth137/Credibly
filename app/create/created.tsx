@@ -3,9 +3,22 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useAppSelector } from "@/redux/hooks/hooks"
 import { Wallet, Play, Check, Copy } from "lucide-react"
+import { useEffect, useState } from "react"
+import CopyToClipboard from "react-copy-to-clipboard"
 
 export default function Created() {
     const data = useAppSelector(state => state.data)
+    const [origin, setOrigin] = useState('')
+    const [copied, setCopied] = useState<boolean>(false)
+
+
+    useEffect(() => {
+        handleGetDomain();
+    }, [])
+
+    const handleGetDomain = () => {
+        setOrigin(window.location.origin);
+    };
     return (
         <main className="container mx-auto px-4 py-8 md:py-12 flex flex-col items-center">
             <div className="bg-[#2a2b5b]/30 backdrop-blur-sm p-6 rounded-lg w-full max-w-2xl">
@@ -25,16 +38,25 @@ export default function Created() {
                         </Button>
                     </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Title of the video</h3>
+                <h3 className="text-xl font-semibold mb-4">{data.title}</h3>
                 <div className="flex items-center space-x-2 bg-[#3a3b6b]/50 rounded-md p-2">
                     <Input
-                        value={`https://credibly.com/${data.link}`}
+                        value={`${origin}/certify/${data.link}`}
                         readOnly
                         className="flex-grow bg-transparent border-none text-white"
                     />
-                    <Button variant="outline" size="icon" className="bg-[#4a4b7b]/50 hover:bg-[#5a5b8b]/50">
-                        <Copy className="h-4 w-4" />
-                    </Button>
+                    <CopyToClipboard text={`${origin}/certify/${data.link}`}>
+                        <Button onClick={() => setCopied(true)} variant="outline" size="icon" className="bg-[#4a4b7b]/50 hover:bg-[#5a5b8b]/50">
+                            {
+                                !copied &&
+                                <Copy className="h-4 w-4" />
+                            }
+                            {
+                                copied &&
+                                <Check className='h-4 w-4' />
+                            }
+                        </Button>
+                    </CopyToClipboard>
                 </div>
             </div>
         </main>

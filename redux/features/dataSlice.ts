@@ -19,14 +19,14 @@ export const dataSlice = createSlice({
             state.title = action.payload.video.snippet.title;
             state.description = action.payload.video.snippet.description;
             state.tags = action.payload.tags;
-            state.thumbnail = action.payload.video.snippet.thumbnails.maxres.url;
+            state.thumbnail = action.payload.video.snippet.thumbnails.high.url;
         },
         setDataFromPlaylist: (state, action: PayloadAction<{ playlist: PlaylistItem, tags: string[] }>) => {
             state.id = action.payload.playlist.id;
             state.title = action.payload.playlist.snippet.title;
             state.description = action.payload.playlist.snippet.description;
             state.tags = action.payload.tags;
-            state.thumbnail = action.payload.playlist.snippet.thumbnails.maxres.url
+            state.thumbnail = action.payload.playlist.snippet.thumbnails.high.url
         },
         setValidation: (state, action: PayloadAction<string>) => {
             state.validation = action.payload
