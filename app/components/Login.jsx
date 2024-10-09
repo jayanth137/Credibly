@@ -9,7 +9,7 @@ export default function Login() {
     };
 
     return (
-        <Button onClick={handleLogin}>Login with Google</Button>
+        <Button className="w-full bg-black text-white hover:bg-gray-800 mb-4" onClick={handleLogin}>Login with Google</Button>
     );
 }
 // <div style={{ textAlign: 'center', margin: '2rem' }}>

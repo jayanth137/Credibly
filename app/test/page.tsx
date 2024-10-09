@@ -3,22 +3,33 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Crown, Wallet } from "lucide-react"
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import Login from "../components/Login";
+import { redirect } from "next/navigation";
+import Logout from "../components/Logout";
+import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function Component() {
+    const { data: session, status } = useSession();
+    const [videos, setVideos] = useState<any[]>();
+    const [error, setError] = useState<string>()
+
+    useEffect(() => {
+        if (session) redirect('/create')
+    }, [])
+
+
+    if (status === 'loading') {
+        return <p>Loading...</p>;
+    }
+
     return (
         <div className="h-screen bg-gradient-to-br from-[#1a1b3b] to-[#2a2b5b] text-white overflow-hidden flex flex-col">
+            <Logout />
             <header className="flex justify-between items-center p-4 md:p-6">
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex items-center space-x-2"
-                >
-                    <Crown className="w-6 h-6 text-yellow-400" />
-                    <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                        Credibily
-                    </span>
-                </motion.div>
+                <Logo />
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -50,9 +61,11 @@ export default function Component() {
                         <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-6 py-4 rounded-full">
                             Mint Certificate
                         </Button>
-                        <Button variant="outline" className="border-white hover:bg-white/10 text-lg px-6 py-4 rounded-full">
-                            Join as a creator
-                        </Button>
+                        <Link href={'/login'} >
+                            <Button variant="outline" className="border-white hover:bg-white/10 text-lg px-6 py-4 rounded-full">
+                                Join as a creator
+                            </Button>
+                        </Link>
                     </div>
                 </motion.div>
                 <motion.div
