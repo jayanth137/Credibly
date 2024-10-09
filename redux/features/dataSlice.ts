@@ -11,6 +11,7 @@ export const dataSlice = createSlice({
         tags: ['',],
         thumbnail: '',
         validation: '',
+        link: '',
     },
     reducers: {
         setDataFromVideo: (state, action: PayloadAction<{ video: VideoEntity, tags: string[] }>) => {
@@ -30,9 +31,12 @@ export const dataSlice = createSlice({
         setValidation: (state, action: PayloadAction<string>) => {
             state.validation = action.payload
         },
+        setLink: (state, action: PayloadAction<string>) => {
+            state.link = action.payload
+        }
     }
 })
 
-export const { setDataFromVideo, setDataFromPlaylist, setValidation } = dataSlice.actions
+export const { setDataFromVideo, setDataFromPlaylist, setValidation, setLink } = dataSlice.actions
 // export const useDispatch = state => state.
 export default dataSlice.reducer

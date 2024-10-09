@@ -11,8 +11,11 @@ import { Wallet, Plus, Play } from "lucide-react"
 import { Video, VideoEntity } from '../types/videos'
 import { PlaylistItem } from '../types/playlist'
 import { signOut, useSession } from 'next-auth/react'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks'
+import { setDataFromPlaylist, setDataFromVideo, setLink } from '@/redux/features/dataSlice'
+import { storeLink } from '@/lib/storeLink'
 
-function Create() {
+function Create({ setCreated }) {
 
     const [data, setData] = useState<{
         videos: VideoEntity[],
@@ -24,7 +27,8 @@ function Create() {
     const [selected, setSelected] = useState<VideoEntity | PlaylistItem>()
     const [tags, setTags] = useState<string[]>([])
     const [tagsString, setTagsString] = useState<string>('')
-
+    const dispatch = useAppDispatch()
+    const selector = useAppSelector(state => state.data)
 
     useEffect(() => {
         // console.log(session.accessTok)
@@ -32,7 +36,6 @@ function Create() {
             fetchData()
         }
     }, [session, status]);
-
     async function fetchData() {
         const resp = await fetch('/api/youtube/getVideos', {
             headers: {
@@ -58,7 +61,34 @@ function Create() {
     }
 
     async function submitForm() {
+        if (category == 'playlists') {
+            dispatch(setDataFromPlaylist({ playlist: selected, tags: tags }))
+        }
+        else {
+            dispatch(setDataFromVideo({ video: selected, tags: tags }))
+        }
+        console.log(selector)
+        try {
+            const response = await fetch('/api/getLink/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: selected, tags: tags, validation: 'quiz' }),
+            });
+            console.log(response)
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
 
+            const result = await response.json();
+            console.log('New Link CUID:', result.cuid);
+            dispatch(setLink(result.cuid))
+            setCreated(true)
+            return result.cuid;
+        } catch (error) {
+            console.log('Failed to save link:', error);
+        }
     }
 
     return (
@@ -85,7 +115,7 @@ function Create() {
                             category == 'playlists' &&
                             <Select onValueChange={(val) => {
                                 setSelected(data.playlists[parseInt(val)])
-                                // console.log(selected)
+                                console.log(selected)
                             }}>
                                 <SelectTrigger className="w-full mt-1 bg-[#3a3b6b]/50 border-[#4a4b7b]">
                                     <SelectValue placeholder="Select" />
@@ -104,7 +134,7 @@ function Create() {
                             category == 'videos' &&
                             <Select onValueChange={(val) => {
                                 setSelected(data.videos[parseInt(val)])
-                                // console.log(data.videos[parseInt(val)])
+                                console.log(selected)
                             }}>
                                 <SelectTrigger className="w-full mt-1 bg-[#3a3b6b]/50 border-[#4a4b7b]">
                                     <SelectValue placeholder="Select" />

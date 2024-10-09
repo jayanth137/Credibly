@@ -17,8 +17,8 @@ export default function Component() {
   const [error, setError] = useState<string>()
 
   useEffect(() => {
-    if (session) redirect('/create')
-  }, [])
+    if (session) console.log(session)
+  }, [session])
 
 
   if (status === 'loading') {

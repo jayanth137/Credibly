@@ -1,3 +1,4 @@
+'use client'
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -7,8 +8,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Wallet, Plus, Play } from "lucide-react"
 import Create from "./create"
+import Created from "./created"
+import { useState } from "react"
 
 export default function CourseCreation() {
+    const [created, setCreated] = useState<boolean>(false)
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#1a1b3b] to-[#2a2b5b] text-white">
             <header className="flex justify-between items-center p-4 md:p-6 bg-[#2a2b5b]/50 backdrop-blur-sm">
@@ -18,7 +22,14 @@ export default function CourseCreation() {
                     Wallet Name
                 </Button>
             </header>
-            <Create />
+            {
+                !created &&
+                <Create setCreated={setCreated} />
+            }
+            {
+                created &&
+                <Created />
+            }
         </div>
     )
 }
