@@ -2,6 +2,8 @@
 import React from 'react'
 import { motion } from "framer-motion"
 import { Crown } from 'lucide-react'
+import logo from '../app/assets/logo.svg'
+import Image from 'next/image'
 
 
 function Logo() {
@@ -12,9 +14,9 @@ function Logo() {
             transition={{ duration: 0.5 }}
             className="flex items-center space-x-2"
         >
-            <Crown className="w-6 h-6 text-yellow-400" />
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                Credibily
+            <Image src={logo} width={25} height={25} alt="logo" />
+            <span className="text-xl font-bold text-white">
+                Credibly
             </span>
         </motion.div>
     )

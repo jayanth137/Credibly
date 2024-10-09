@@ -10,6 +10,9 @@ import { redirect } from "next/navigation";
 import Logout from "./components/Logout";
 import Link from "next/link";
 import Logo from "@/components/logo";
+import Image from "next/image";
+import logo from '../app/assets/logo.svg'
+
 
 export default function Component() {
   const { data: session, status } = useSession();
@@ -26,21 +29,7 @@ export default function Component() {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-[#1a1b3b] to-[#2a2b5b] text-white overflow-hidden flex flex-col">
-      <Logout />
-      <header className="flex justify-between items-center p-4 md:p-6">
-        <Logo />
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Button variant="outline" className="bg-white/10 text-white hover:bg-white/20 px-6 rounded-full">
-            <Wallet className="w-4 h-4 mr-2" />
-            Connect Wallet
-          </Button>
-        </motion.div>
-      </header>
+    <div className="h-[85vh] text-white overflow-hidden flex flex-col">
       <main className="flex-grow flex flex-col md:flex-row items-center justify-center px-4 md:px-8 lg:px-16">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -49,8 +38,8 @@ export default function Component() {
           className="md:w-1/2 space-y-6 text-center md:text-left mb-8 md:mb-0"
         >
           <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
-            <Crown className="w-12 h-12 text-yellow-400" />
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            <Image src={logo} width={50} height={50} alt="logo" />
+            <h1 className="text-4xl md:text-5xl font-bold text-white">
               Credibily
             </h1>
           </div>
@@ -74,9 +63,9 @@ export default function Component() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="md:w-1/2 relative"
         >
-          <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-3xl p-4 md:p-6 max-w-md mx-auto backdrop-blur-sm">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s"
+          <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto backdrop-blur-2xl bg-white/20">
+            <Image
+              src={require('../app/assets/hero.png')}
               alt="Lion NFT"
               className="w-full h-auto rounded-2xl"
             />
@@ -87,11 +76,11 @@ export default function Component() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="absolute -bottom-8 -left-8 w-24 h-24 md:w-28 md:h-28"
           >
-            <img
+            {/* <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s"
               alt="NFT Icon"
               className="w-full h-full object-cover"
-            />
+            /> */}
           </motion.div>
         </motion.div>
       </main>

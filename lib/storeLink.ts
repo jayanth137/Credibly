@@ -6,6 +6,7 @@ export async function storeLink(data: PlaylistItem | VideoEntity, tags: string[]
     const title = data.snippet.title;
     const description = data.snippet.description;
     const author = data.snippet.channelTitle
+    const videoId = data.id
 
     const thumbnail = data.snippet.thumbnails.high.url
     const prisma = new PrismaClient()
@@ -19,6 +20,7 @@ export async function storeLink(data: PlaylistItem | VideoEntity, tags: string[]
             tags: tags,
             thumbnail: thumbnail,
             validation: validation,
+            videoId: videoId
         },
     });
 
