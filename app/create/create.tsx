@@ -72,13 +72,13 @@ function Create({ setCreated }) {
 
     async function submitForm() {
         console.log(selected)
-        if (category == 'playlists') {
-            dispatch(setDataFromPlaylist({ playlist: selected, tags: tags }))
-        }
-        else {
-            dispatch(setDataFromVideo({ video: selected, tags: tags }))
-        }
-        console.log(selector)
+        // if (category == 'playlists') {
+        //     dispatch(setDataFromPlaylist({ playlist: selected, tags: tags }))
+        // }
+        // else {
+        //     dispatch(setDataFromVideo({ video: selected, tags: tags }))
+        // }
+        // console.log(selector)
         try {
             const response = await fetch('/api/getLink/', {
                 method: 'POST',
