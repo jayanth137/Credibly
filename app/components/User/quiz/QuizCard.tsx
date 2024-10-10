@@ -27,7 +27,7 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
     fetchQuizData();
   }, []);
 
-  if (!quizData) {
+  if (!quizData || !quizData.questions) {
     return <p>Loading quiz...</p>;
   }
 
