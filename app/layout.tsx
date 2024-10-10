@@ -2,10 +2,22 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import AuthProvider from './AuthProvider';
-import Navbar from './components/Navbar'; import { Provider } from "react-redux";
-import { store } from "@/redux/store";
-import ReduxProvider from "./ReduxProvider";
+import Navbar from './components/Navbar';
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
+import ReduxProvider from './ReduxProvider';
+import '@rainbow-me/rainbowkit/styles.css';
 
+import '@coinbase/onchainkit/styles.css';
+
+import dynamic from 'next/dynamic';
+
+const OnchainProviders = dynamic(
+  () => import('./components/Wallet/OnchainProviders'),
+  {
+    ssr: false,
+  }
+);
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,9 +46,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-[#020234] to-[#252c6a]`}
       >
         <AuthProvider>
-          <Navbar />
           <ReduxProvider>
-            {children}
+            <OnchainProviders>
+              <Navbar />
+              {children}
+            </OnchainProviders>
           </ReduxProvider>
         </AuthProvider>
       </body>
