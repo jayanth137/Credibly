@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-const QuizCard = () => {
+const QuizCard = ({ videoId }: { videoId: string }) => {
   const [quizData, setQuizData] = useState<any>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -14,7 +14,7 @@ const QuizCard = () => {
         const response = await fetch('/api/getQuestion', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: 'ZDuRmhLSLOY' }),
+          body: JSON.stringify({ id: videoId }),
         });
 
         const data = await response.json();
