@@ -20,7 +20,9 @@ model Links {
   title       String
   description String
   author      String
+  videoId     String
   tags        String[]
   thumbnail   String
   validation  String
+  type        String
 }

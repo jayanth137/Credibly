@@ -1,16 +1,10 @@
 import { Label } from '@radix-ui/react-label';
+import { Check, CheckCircle } from 'lucide-react';
 import React from 'react';
 
 const Card = {
   title: 'Introduction to Web3 & Blockchain',
   Modules: [
-    'Introduction to Web3 & Blockchain',
-    'What is Blockchain',
-    'What is Web3',
-    'How to use Web3',
-    'How to use Blockchain',
-    'Advanced Web3 Applications',
-    'Blockchain Security',
     'Smart Contracts',
     'Decentralized Applications (dApps)',
     'Cryptocurrency & Transactions',
@@ -21,9 +15,9 @@ const Card = {
   Videos: '12 video lectures',
 };
 
-const PriceInfo = () => {
+const PriceInfo = ({ validation }) => {
   return (
-    <div className="backdrop-blur-lg bg-white/10 rounded-lg border border-white/20 shadow-lg p-6 max-w-sm">
+    <div className="backdrop-blur-lg bg-white/10 rounded-lg border border-white/20 shadow-lg p-6 w-full">
       {/* Course Title */}
       <h3 className="text-2xl font-bold text-white mb-4">{Card.title}</h3>
 
@@ -53,6 +47,13 @@ const PriceInfo = () => {
           Number of Videos
         </Label>
         <p className="text-white/80">{Card.Videos}</p>
+      </div>
+      <div className="space-y-1 mb-6">
+        <Label htmlFor="course-videos" className="text-lg text-white flex gap-2 items-center">
+          <CheckCircle className="w-5 h-5 text-green-400" />
+          Validation Type: {validation}
+        </Label>
+        {/* <p className="text-white/80">{validation}</p> */}
       </div>
 
       {/* Enroll Button */}

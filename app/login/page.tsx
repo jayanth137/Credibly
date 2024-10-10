@@ -4,24 +4,17 @@ import { Crown } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import Login from "../components/Login"
+import Logo from "@/components/logo"
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen bg-[#1a1b3b] text-white flex flex-col">
-            <header className="p-4 md:p-6">
-                <div className="flex items-center space-x-2">
-                    <Crown className="w-6 h-6 text-yellow-400" />
-                    <Link href={'/'} className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                        Credibily
-                    </Link>
-                </div>
-            </header>
+        <div className="min-h-screen text-white flex flex-col">
             <main className="flex-grow flex items-center justify-center p-4 md:p-8">
                 <div className="bg-[#2a2b5b] rounded-lg overflow-hidden max-w-4xl w-full shadow-xl h-[70vh]">
                     <div className="flex flex-col md:flex-row h-full">
-                        <div className="md:w-1/2 bg-gradient-to-br from-purple-900 to-pink-800 p-8 text-white">
+                        <div className="md:w-1/2 bg-black p-8 text-white">
                             <div className="mb-6">
-                                <Crown className="w-6 h-6 text-yellow-400" />
+                                <Image src={require('../assets/logo.svg')} alt="logo" />
 
                             </div>
                             <h2 className="text-3xl font-bold mb-4">Join with us</h2>
