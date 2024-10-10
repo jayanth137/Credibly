@@ -24,4 +24,5 @@ model Links {
   tags        String[]
   thumbnail   String
   validation  String
+  type        String
 }

@@ -33,6 +33,7 @@ function Create({ setCreated }) {
     useEffect(() => {
         // console.log(session.accessTok)
         if (session && status === 'authenticated') {
+            console.log(session)
             fetchData()
         }
     }, [session, status]);
@@ -60,6 +61,7 @@ function Create({ setCreated }) {
         }
         else {
             setData(respJson)
+            // console.log(resp.jso)
             // setSelected(respJson.videos[0])
         }
         // console.log(data)

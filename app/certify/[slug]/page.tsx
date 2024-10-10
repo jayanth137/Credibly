@@ -88,7 +88,7 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
                                 </h1>
                                 <div className="flex items-center justify-between ">
                                     <div>
-                                        <div className=" flex items-center justify-center backdrop-blur-lg     bg-white/10 rounded-lg border border-white/20 shadow-lg p-2 px-3 ">
+                                        <div className=" flex items-center justify-center backdrop-blur-lg bg-white/10 rounded-lg border border-white/20 shadow-lg p-2 px-3 ">
                                             <Avatar className="w-12 h-12">
                                                 <AvatarImage
                                                     src="https://github.com/shadcn.png"
@@ -102,14 +102,14 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
                                         </div>
                                     </div>
 
-                                    <div className=" flex backdrop-blur-lg     bg-white/10 rounded-lg border border-white/20 shadow-lg p-2">
+                                    <div className=" flex backdrop-blur-lg gap-4 bg-white/10 rounded-lg border border-white/20 shadow-lg p-2">
                                         <Avatar className="w-12 h-12">
                                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>{' '}
-                                        <div>
-                                            <p className="text-white">Harikaet Singh</p>
-                                            <p className="text-white">1.1 mil Subcribers</p>
+                                        <div className='flex items-center'>
+                                            <p className="text-white">{data.author}</p>
+                                            {/* <p className="text-white">1.1 mil Subcribers</p> */}
                                         </div>
                                     </div>
                                 </div>
