@@ -5,7 +5,7 @@ import fs from "fs";
 
 dotenv.config();
 
-async function generateSummaryAndQuiz() {
+export default async function generateSummaryAndQuiz(id: string) {
     try {
         const geminiKey = process.env.GEMINI_KEY;
         if (!geminiKey) {
@@ -14,7 +14,7 @@ async function generateSummaryAndQuiz() {
         const genAI = new GoogleGenerativeAI(geminiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-        const transcript = await fetchAndProcessTranscript('https://www.youtube.com/watch?v=ZDuRmhLSLOY');
+        const transcript = await fetchAndProcessTranscript('https://www.youtube.com/watch?v=' + id);
         console.log("transcript" + transcript);
         const prompt = `Summarize the YouTube video and generate a technical quiz of 10 questions in JSON format based on the content of the video. 
 
@@ -122,5 +122,3 @@ In addition to the quiz:
         console.error("Error generating content:", error);
     }
 }
-
-generateSummaryAndQuiz();

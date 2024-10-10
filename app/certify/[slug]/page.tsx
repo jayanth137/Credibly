@@ -22,7 +22,8 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
         thumbnail: string,
         title: string,
         validation: string,
-        updatedAt: string
+        updatedAt: string,
+        videoId: string
     }>()
     const [origin, setOrigin] = useState<string>()
     const [error, setError] = useState<string>()
