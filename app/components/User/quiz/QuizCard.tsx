@@ -38,7 +38,7 @@ const QuizCard = () => {
   const { id, question, options, correct_answer, userAnswer, summary } =
     quizData[1]; // Example for the first question
 
-  const handleClick = (selectedOption) => {
+  const handleClick = (selectedOption: string) => {
     console.log(`Selected Option: ${selectedOption}`);
     // Handle logic for setting user's answer here
   };
@@ -55,22 +55,21 @@ const QuizCard = () => {
       {options.map((opt, i) => (
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm active:text-neutral-50 active:bg-orange-500/90 ${
-            userAnswer === opt
-              ? userAnswer === correct_answer
-                ? 'bg-green-200 text-green-800 font-semibold'
-                : 'bg-red-200 text-red-800 font-semibold'
-              : !summary
+          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm active:text-neutral-50 active:bg-orange-500/90 ${userAnswer === opt
+            ? userAnswer === correct_answer
+              ? 'bg-green-200 text-green-800 font-semibold'
+              : 'bg-red-200 text-red-800 font-semibold'
+            : !summary
               ? 'md:hover:bg-orange-500/90 md:hover:text-neutral-50 cursor-pointer'
               : ''
-          }`}
+            }`}
           onClick={() => handleClick(opt)}
           style={
             userAnswer === opt && userAnswer !== correct_answer && summary
               ? {
-                  background: 'rgb(254 202 202 / 1)', // Red background for incorrect answer
-                  color: 'rgb(127 29 29 / 1)', // Dark red text for incorrect answer
-                }
+                background: 'rgb(254 202 202 / 1)', // Red background for incorrect answer
+                color: 'rgb(127 29 29 / 1)', // Dark red text for incorrect answer
+              }
               : {}
           }
         >
