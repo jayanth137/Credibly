@@ -1,13 +1,8 @@
 'use client'
 import { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Wallet, Play, Copy, User, CheckCircle, Check } from "lucide-react"
-import Logo from '@/components/logo';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import PriceInfo from '@/app/components/User/coursePage/PriceInfo';
-import { useAppSelector } from '@/redux/hooks/hooks';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Params {

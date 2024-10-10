@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { storeLink } from '@/lib/storeLink'; // Adjust the import based on your file structure
 import { PlaylistItem } from "@/app/types/playlist";
 import { VideoEntity } from "@/app/types/videos";
+import { pinata } from '@/utils/config';
 
 export async function POST(request: Request) {
     try {
@@ -13,8 +14,10 @@ export async function POST(request: Request) {
         }
 
         const newLink = await storeLink(data as PlaylistItem | VideoEntity, tags, validation);
+        // const link = pinata.gateways.createSignedURL({
 
-        return NextResponse.json({ cuid: newLink.id }, { status: 201 });
+        // })
+        return NextResponse.json({ cuid: newLink }, { status: 201 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
