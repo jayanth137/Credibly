@@ -20,24 +20,28 @@ const page = () => {
     videoId: string
   }>()
   useEffect(() => {
-    fetchCertification()
-  }, [])
+    fetchCertification();
+  }, []);
   async function fetchCertification() {
-    const resp = await fetch('/api/getCertification/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ cuid: slug })
-    })
-    if (resp.status != 200) {
-      setError('Invalid link provided')
-      return
-    }
-    const responseData = await resp.json()
-    console.log(responseData)
-    setData(responseData)
+    try {
+      // Use the slug as the CID to fetch data from IPFS
+      const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${slug}`);
 
+      if (ipfsResp.status !== 200) {
+        setError('Failed to fetch data from IPFS');
+        return;
+      }
+
+      // Parse the IPFS data
+      const ipfsData = await ipfsResp.json();
+      console.log('IPFS data:', ipfsData);
+
+      // Set the data to state
+      setData(ipfsData);
+    } catch (err) {
+      setError('Failed to fetch certification data.');
+      console.error('Error fetching certification:', err);
+    }
   }
   if (error) {
     return <p>Error: {error}</p>

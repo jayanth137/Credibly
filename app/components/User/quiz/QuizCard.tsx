@@ -18,6 +18,7 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
         });
 
         const data = await response.json();
+        console.log('Quiz data:', JSON.stringify(data, null, 4));
         setQuizData(data);
       } catch (error) {
         console.error('Failed to fetch quiz data:', error);

@@ -12,11 +12,13 @@ export default async function generateSummaryAndQuiz(id: string) {
             throw new Error("GEMINI_KEY is not defined in the environment variables.");
         }
         const genAI = new GoogleGenerativeAI(geminiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-002" });
 
         const transcript = await fetchAndProcessTranscript('https://www.youtube.com/watch?v=' + id);
         console.log("transcript" + transcript);
-        const prompt = `Summarize the YouTube video and generate a technical quiz of 10 questions in JSON format based on the content of the video. 
+
+        // Keeping the content of the prompt unchanged, but fixing JSON structure:
+        const prompt = `Summarize the YouTube video and generate a technical quiz of 10 questions in JSON format based on the content of the video in JSON format strictly:. 
 
 **Instructions for the quiz**:
 1. Generate **10 standard multiple-choice questions** where there is one correct answer.
@@ -38,28 +40,17 @@ In addition to the quiz:
         {
             "question": "What is the capital of France?",
             "options": [
-                {
-                    "option": "Paris",
-                },
-                {
-                    "option": "London",
-                },
-                {
-                    "option": "Berlin",
-                },
-                {
-                    "option": "Madrid",
-                }
+                "Paris",
+                "London",
+                "Berlin",
+                "Madrid"
             ],
             "correct": "Paris",
             "timeStamp": "00:00:00 - 00:00:10"
         }
     ],
     "answerKey": {
-        "1": "Paris",
-        "2": "Answer 2",
-        "3": "Answer 3",
-        ...
+        "1": "Paris"
     },
     "codingProject": {
         "techStack": ["JavaScript", "Node.js", "Express", "MongoDB"],
@@ -71,11 +62,7 @@ In addition to the quiz:
         "directoryStructure": {
             "root": "/",
             "directories": [
-                "src/",
-                "src/controllers/",
-                "src/models/",
-                "src/routes/",
-                "tests/"
+                "src/", "src/controllers/", "src/models/", "src/routes/", "tests/"
             ],
             "files": [
                 "src/index.js",
@@ -88,17 +75,17 @@ In addition to the quiz:
         "setupSteps": [
             "Initialize the project with 'npm init'.",
             "Install Express, Mongoose, and JWT packages.",
-            "Create the 'src / ' directory with subfolders for models, routes, and controllers.",
+            "Create the 'src' directory with subfolders for models, routes, and controllers.",
             "Create a test folder for unit tests."
         ],
         "testCases": [
             {
                 "objective": "Check if the API creates a new user.",
-                "test": "Send a POST request to '/ api / users' and expect a 201 response."
+                "test": "Send a POST request to '/api/users' and expect a 201 response."
             },
             {
                 "objective": "Verify that the API updates an existing user.",
-                "test": "Send a PUT request to '/ api / users /: id' and check if the user data is updated."
+                "test": "Send a PUT request to '/api/users/:id' and check if the user data is updated."
             },
             {
                 "objective": "Ensure that unauthenticated requests are denied.",
@@ -107,18 +94,13 @@ In addition to the quiz:
         ]
     }
 }
-
- ` + transcript;
+` + transcript;
 
         console.log("Generating content based on the following prompt:", prompt);
         const result = await model.generateContent(prompt);
 
-        // console.log(result.response.text());
-        // return result as json.
+        // Return the generated content as text
         return result.response.text();
-        // Save the generated content to a file as a JSON object
-        // fs.writeFileSync("content.json", result.response.text());
-        console.log("Content saved to 'content.json'");
     } catch (error) {
         console.error("Error generating content:", error);
     }
