@@ -113,10 +113,11 @@ In addition to the quiz:
         console.log("Generating content based on the following prompt:", prompt);
         const result = await model.generateContent(prompt);
 
-        console.log(result.response.text());
-
+        // console.log(result.response.text());
+        // return result as json.
+        return result.response.text();
         // Save the generated content to a file as a JSON object
-        fs.writeFileSync("content.json", result.response.text());
+        // fs.writeFileSync("content.json", result.response.text());
         console.log("Content saved to 'content.json'");
     } catch (error) {
         console.error("Error generating content:", error);
