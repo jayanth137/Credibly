@@ -38,6 +38,7 @@ In addition to the quiz:
     "summary": "A brief summary of the video content.",
     "questions": [
         {
+            "id": 1,
             "question": "What is the capital of France?",
             "options": [
                 "Paris",
