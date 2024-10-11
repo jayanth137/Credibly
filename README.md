@@ -1,7 +1,3 @@
-Here’s the rewritten README with the template you provided, incorporating the content from your project **Credibily**:
-
----
-
 <p align="center">
   <a href="" rel="noopener">
     <img src="https://i.imgur.com/AZ2iWek.png" alt="Credibily logo"></a>
