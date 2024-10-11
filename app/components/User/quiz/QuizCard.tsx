@@ -1,88 +1,106 @@
 'use client';
-import React from 'react';
-
-// Dummy quiz data
-const quizData = [
-  {
-    id: 1,
-    question: 'What is Blockchain?',
-    options: [
-      'A decentralized ledger',
-      'A type of database',
-      'A cryptocurrency',
-      'A peer-to-peer network',
-    ],
-    correct_answer: 'A decentralized ledger',
-    userAnswer: 'A decentralized ledger', // Set to null if user has not answered
-    summary:
-      'Blockchain is a decentralized, distributed ledger technology that records transactions across many computers.',
-  },
-  {
-    id: 2,
-    question: 'What is Web3?',
-    options: [
-      'A new internet standard',
-      'The third version of the internet',
-      'Decentralized web applications',
-      'All of the above',
-    ],
-    correct_answer: 'All of the above',
-    userAnswer: null,
-    summary:
-      'Web3 refers to the next generation of the internet, emphasizing decentralization and user ownership.',
-  },
-  // Add more questions as needed
-];
+import React, { useState } from 'react';
+import Data from '@/app/questionJSON/content.json';
 
 const QuizCard = () => {
-  const { id, question, options, correct_answer, userAnswer, summary } =
-    quizData[1]; // Example for the first question
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  const [score, setScore] = useState(0);
+  const [quizFinished, setQuizFinished] = useState(false);
+
+  const currentQuestion = Data.questions[currentQuestionIndex];
 
   const handleClick = (selectedOption: string) => {
-    console.log(`Selected Option: ${selectedOption}`);
-    // Handle logic for setting user's answer here
+    if (userAnswers[currentQuestionIndex] !== undefined) return;
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentQuestionIndex] = selectedOption;
+    setUserAnswers(updatedAnswers);
+
+    if (selectedOption === currentQuestion.correct) {
+      setScore((prevScore) => prevScore + 1);
+    }
+
+    if (currentQuestionIndex < Data.questions.length - 1) {
+      setTimeout(() => setCurrentQuestionIndex(currentQuestionIndex + 1), 500);
+    } else {
+      setQuizFinished(true);
+    }
   };
 
+  if (quizFinished) {
+    return (
+      <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
+        <h1 className="text-white text-4xl font-semibold">Quiz Completed!</h1>
+        <p className="text-gray-300 text-lg mt-4">
+          Your final score is: <strong className="text-white">{score}/{Data.questions.length}</strong>
+        </p>
+
+        {/* Result Table */}
+        <table className="table-auto w-full mt-6 bg-white rounded-lg">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="px-4 py-2">Question</th>
+              <th className="px-4 py-2">Your Answer</th>
+              <th className="px-4 py-2">Correct Answer</th>
+              <th className="px-4 py-2">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Data.questions.map((q: any, i: number) => (
+              <tr key={i} className="border-b">
+                <td className="px-4 py-2">{q.question}</td>
+                <td className={`px-4 py-2 ${userAnswers[i] === q.correct ? 'text-green-600' : 'text-red-600'}`}>
+                  {userAnswers[i]}
+                </td>
+                <td className="px-4 py-2">{q.correct}</td>
+                <td className="px-4 py-2">
+                  {userAnswers[i] === q.correct ? (
+                    <span className="text-green-600 font-semibold">Correct</span>
+                  ) : (
+                    <span className="text-red-600 font-semibold">Wrong</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    );
+  }
+
+  const userAnswerForCurrent = userAnswers[currentQuestionIndex];
+  const isCorrect = userAnswerForCurrent === currentQuestion.correct;
+
   return (
-    <section className="  w-3/4   backdrop-blur-lg     bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
-      <h3 className="text-white text-sm font-semibold">Question {id}/10</h3>
+    <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
+      <h3 className="text-white text-sm font-semibold">
+        Question {currentQuestionIndex + 1}/{Data.questions.length}
+      </h3>
 
       <div className="flex items-start space-x-3 text-base md:text-lg mb-6">
-        <h3 className="text-white text-4xl font-semibold">{question}</h3>
+        <h3 className="text-white text-4xl font-semibold">{currentQuestion.question}</h3>
       </div>
 
-      {/* Quiz Options */}
-      {options.map((opt, i) => (
+      {currentQuestion.options.map((opt: string, i: number) => (
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm active:text-neutral-50 active:bg-orange-500/90 ${userAnswer === opt
-            ? userAnswer === correct_answer
-              ? 'bg-green-200 text-green-800 font-semibold'
-              : 'bg-red-200 text-red-800 font-semibold'
-            : !summary
-              ? 'md:hover:bg-orange-500/90 md:hover:text-neutral-50 cursor-pointer'
-              : ''
+          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
+            ? isCorrect
+              ? 'bg-green-100 text-green-800 border-green-600'
+              : 'bg-red-100 text-red-800 border-red-600'
+            : 'hover:bg-gray-200 text-black'
             }`}
           onClick={() => handleClick(opt)}
-          style={
-            userAnswer === opt && userAnswer !== correct_answer && summary
-              ? {
-                background: 'rgb(254 202 202 / 1)', // Red background for incorrect answer
-                color: 'rgb(127 29 29 / 1)', // Dark red text for incorrect answer
-              }
-              : {}
-          }
+          style={{ pointerEvents: userAnswerForCurrent ? 'none' : 'auto' }}
         >
           <p>{opt}</p>
         </div>
       ))}
 
-      {/* Display Summary if answer has been submitted */}
-      {userAnswer && (
-        <p className="mt-4 text-gray-700">
-          <strong>Correct Answer:</strong> {correct_answer}
+      {userAnswerForCurrent && (
+        <p className="mt-4 text-gray-300">
+          <strong className="text-white">Correct Answer:</strong> {currentQuestion.correct}
           <br />
-          <strong>Summary:</strong> {summary}
         </p>
       )}
     </section>

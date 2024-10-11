@@ -1,0 +1,187 @@
+{
+    "summary": "This video explains OAuth 2.0, a protocol that allows websites to access user data on other websites without requiring passwords. It compares OAuth 1.0 and 2.0, highlighting improvements in security and ease of implementation. The video delves into access tokens, their function, and how they're used in the authorization code flow. It further explains the roles of resource servers and identity providers, distinguishing between authentication and authorization. Finally, the video discusses the four OAuth 2.0 flows (authorization code, client credentials, resource owner password, and implicit), the benefits of using JWTs with OAuth 2.0, and the future of OAuth.",
+    "questions": [
+        {
+            "id": 1,
+            "question": "What was the primary reason OAuth 1.0 was difficult to implement?",
+            "options": [
+                "Lack of developer support.",
+                "It was too similar to traditional username/password methods.",
+                "Its complexity made it challenging to integrate.",
+                "It wasn't compatible with mobile applications."
+            ],
+            "correct": "Its complexity made it challenging to integrate.",
+            "timeStamp": "00:00:12 - 00:00:18"
+        },
+        {
+            "id": 2,
+            "question": "What does the access token represent in OAuth 2.0?",
+            "options": [
+                "The user's actual password.",
+                "Full access to the user's account.",
+                "A time-limited key for accessing specific resources.",
+                "A permanent authorization for all the user's data."
+            ],
+            "correct": "A time-limited key for accessing specific resources.",
+            "timeStamp": "00:01:08 - 00:02:26"
+        },
+        {
+            "id": 3,
+            "question": "In the OAuth 2.0 authorization code flow, what does the application receive after the user authenticates with the identity provider?",
+            "options": [
+                "The user's username and password.",
+                "Direct access to the user's resources.",
+                "An authorization code that can be exchanged for an access token.",
+                "A refresh token without needing an access token."
+            ],
+            "correct": "An authorization code that can be exchanged for an access token.",
+            "timeStamp": "00:01:59 - 00:02:15"
+        },
+        {
+            "id": 4,
+            "question": "What is the main function of a resource server in OAuth 2.0?",
+            "options": [
+                "To authenticate users and issue access tokens.",
+                "To host and protect the resources being accessed.",
+                "To redirect users to the identity provider.",
+                "To generate and manage client secrets."
+            ],
+            "correct": "To host and protect the resources being accessed.",
+            "timeStamp": "00:02:31 - 00:03:17"
+        },
+        {
+            "id": 5,
+            "question": "What is a key difference between an authorization server and an identity provider?",
+            "options": [
+                "They serve the same purpose and are interchangeable terms.",
+                "Authorization servers issue tokens, while identity providers verify user identities.",
+                "Identity providers handle user data, while authorization servers manage applications.",
+                "Authorization servers are always external services, while identity providers are internal."
+            ],
+            "correct": "Authorization servers issue tokens, while identity providers verify user identities.",
+            "timeStamp": "00:03:40 - 00:04:20"
+        },
+        {
+            "id": 6,
+            "question": "Which OAuth 2.0 flow is most suitable when an application needs to access its own protected resources without user context?",
+            "options": [
+                "Authorization code flow",
+                "Client credentials flow",
+                "Resource owner password flow",
+                "Implicit flow"
+            ],
+            "correct": "Client credentials flow",
+            "timeStamp": "00:04:55 - 00:05:16"
+        },
+        {
+            "id": 7,
+            "question": "Why is the resource owner password flow considered less secure than other flows?",
+            "options": [
+                "It involves redirecting the user multiple times.",
+                "The application handles the user's credentials directly.",
+                "It doesn't use access tokens for authorization.",
+                "It relies on a complex system of refresh tokens."
+            ],
+            "correct": "The application handles the user's credentials directly.",
+            "timeStamp": "00:05:18 - 00:05:45"
+        },
+        {
+            "id": 8,
+            "question": "What is the primary security concern with the implicit flow in OAuth 2.0?",
+            "options": [
+                "It transmits the access token directly in the URL.",
+                "It doesn't use refresh tokens for long-lived access.",
+                "It relies on client-side validation of access tokens.",
+                "It allows access to resources without user consent."
+            ],
+            "correct": "It transmits the access token directly in the URL.",
+            "timeStamp": "00:05:46 - 00:06:01"
+        },
+        {
+            "id": 9,
+            "question": "How are JSON Web Tokens (JWTs) typically used within the context of OAuth 2.0?",
+            "options": [
+                "To replace OAuth 2.0 entirely for authorization.",
+                "To store and transmit access tokens securely.",
+                "To manage user sessions and authentication.",
+                "To encrypt sensitive data within the application."
+            ],
+            "correct": "To store and transmit access tokens securely.",
+            "timeStamp": "00:06:28 - 00:07:14"
+        },
+        {
+            "id": 10,
+            "question": "What is the current status of OAuth 3.0?",
+            "options": [
+                "It is an official standard widely adopted in the industry.",
+                "It is in the final stages of development and nearing release.",
+                "It exists as a proposal, but its future is uncertain.",
+                "It has been abandoned in favor of more modern protocols."
+            ],
+            "correct": "It exists as a proposal, but its future is uncertain.",
+            "timeStamp": "00:07:58 - 00:08:05"
+        }
+    ],
+    "answerKey": {
+        "1": "Its complexity made it challenging to integrate.",
+        "2": "A time-limited key for accessing specific resources.",
+        "3": "An authorization code that can be exchanged for an access token.",
+        "4": "To host and protect the resources being accessed.",
+        "5": "Authorization servers issue tokens, while identity providers verify user identities.",
+        "6": "Client credentials flow",
+        "7": "The application handles the user's credentials directly.",
+        "8": "It transmits the access token directly in the URL.",
+        "9": "To store and transmit access tokens securely.",
+        "10": "It exists as a proposal, but its future is uncertain."
+    },
+    "codingProject": {
+        "techStack": [
+            "Node.js",
+            "Express",
+            "Passport.js"
+        ],
+        "objectives": [
+            "Implement OAuth 2.0 authentication using Google as the identity provider.",
+            "Retrieve user profile information from Google after successful login.",
+            "Create a protected route that requires authentication."
+        ],
+        "directoryStructure": {
+            "root": "/",
+            "directories": [
+                "src/",
+                "src/config/",
+                "src/routes/",
+                "views/"
+            ],
+            "files": [
+                "src/index.js",
+                "src/config/keys.js",
+                "src/config/passport-setup.js",
+                "src/routes/auth-routes.js",
+                "views/index.ejs",
+                "views/profile.ejs"
+            ]
+        },
+        "setupSteps": [
+            "Initialize the project: `npm init -y`",
+            "Install dependencies: `npm install express ejs passport passport-google-oauth20 dotenv`",
+            "Create the directory structure as defined above.",
+            "Create files for routes, configuration, and views.",
+            "Set up a Google OAuth 2.0 client ID and secret from the Google Cloud Console."
+        ],
+        "testCases": [
+            {
+                "objective": "User should be redirected to Google for authentication.",
+                "test": "Visit the `/auth/google` route. You should be redirected to the Google authentication page."
+            },
+            {
+                "objective": "User profile information should be displayed after successful login.",
+                "test": "After authenticating with Google, you should be redirected back to the application and see your Google profile information."
+            },
+            {
+                "objective": "Protected routes should require authentication.",
+                "test": "Try accessing a protected route without logging in. You should be redirected to the login page."
+            }
+        ]
+    }
+}
