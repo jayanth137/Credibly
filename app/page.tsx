@@ -27,13 +27,13 @@ export default function Component() {
   }
 
   return (
-    <div className="h-[85vh] text-white overflow-hidden flex flex-col">
-      <main className="flex-grow flex flex-col md:flex-row items-center justify-center px-4 md:px-8 lg:px-16">
+    <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full ">
+      <main className="flex flex-col md:flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="md:w-1/2 space-y-6 text-center md:text-left mb-8 md:mb-0"
+          className="md:w-2/5 space-y-6 text-center md:text-left mb-8 md:mb-0 "
         >
           <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
             <Image src={logo} width={50} height={50} alt="logo" />
@@ -42,19 +42,22 @@ export default function Component() {
             </h1>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
-            Watch, Pausss, and Mint
+            Watch, Validate, and Mint
             <br />
-            Your Success
+            Your <span className='text-orange-600'>
+              Success
+            </span>
           </h2>
 
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4">
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-6 py-4 rounded-2xl">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
+            <Button variant={'outline'} size={'lg'} className="text-white bg-transparent border-white border-2 text-lg px-6 py-4">
               Mint Certificate
             </Button>
             <Link href={'/login'}>
               <Button
-                variant="outline"
-                className="border-white hover:bg-white/10 bg-white text-black hover:text-white text-lg px-6 py-4 rounded-2xl"
+                variant="default"
+                size={'lg'}
+                className="border-white hover:bg-white/10 bg-white text-black hover:text-white text-lg px-6 py-4"
               >
                 Join as a creator
               </Button>
@@ -65,13 +68,13 @@ export default function Component() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="md:w-1/2 relative"
+          className="md:w-2/5 relative"
         >
-          <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto backdrop-blur-2xl bg-white/20">
+          <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
             <Image
-              src={require('../app/assets/hero.png')}
+              src={require('@/public/image 1.svg')}
               alt="Lion NFT"
-              className="w-full h-auto rounded-2xl"
+              className="w-full h-auto rounded-2xl rotate-[-5deg]"
             />
           </div>
           <motion.div
@@ -88,19 +91,14 @@ export default function Component() {
           </motion.div>
         </motion.div>
       </main>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1 }}
-        className="absolute bottom-0 right-0 w-24 h-24 md:w-32 md:h-32"
-      >
-        <svg viewBox="0 0 100 100" className="w-full h-full text-white/10">
-          <path d="M100 0v100H0C0 44.8 44.8 0 100 0z" fill="currentColor" />
-          <circle cx="80" cy="80" r="2" fill="currentColor" />
-          <circle cx="70" cy="70" r="2" fill="currentColor" />
-          <circle cx="60" cy="60" r="2" fill="currentColor" />
-        </svg>
-      </motion.div>
+      <Image src={require('@/public/brain.svg')} alt='right bottom ' className='absolute bottom-0 right-0' />
+      <Image src={require('@/public/lines.svg')} alt='left bottom' className='absolute bottom-0 left-0 -z-10' />
+      <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.25)_0%,rgba(222,231,233,0)_60%)] z-0 absolute -top-20 -left-20 rounded-full'>
+
+      </div>
+      {/* <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(222,231,233,0)_60%)] z-20 absolute bottom-0 right-20 rounded-full'>
+
+      </div> */}
     </div>
   );
 }

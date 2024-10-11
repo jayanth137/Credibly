@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks'
 import { setDataFromPlaylist, setDataFromVideo, setLink } from '@/redux/features/dataSlice'
 import { storeLink } from '@/lib/storeLink'
 import Lottie from 'react-lottie'
+import Image from 'next/image'
 
 function Create({ setCreated }) {
 
@@ -119,6 +120,7 @@ function Create({ setCreated }) {
                 <div className="bg-[#2a2b5b]/30 backdrop-blur-sm p-6 rounded-lg space-y-6">
                     <div>
                         <h2 className="text-2xl font-bold mb-2">Select Category</h2>
+                        <p className='text-red-500 my-4'>DISCLAIMER: PLEASE ENSURE THAT YOU HAVE TRANSCRIPTS FOR THE VIDEO WHICH YOU SELECT OTHERWISE WE COULD NOT GENERATE QUESTIONS FOR THE QUIZ.</p>
                         <p className="text-gray-300 mb-4">Do you want to create certification for a playlist or a video?</p>
                         <RadioGroup defaultValue="videos" onValueChange={setCategory} className="flex space-x-4">
                             <div className="flex items-center space-x-2">

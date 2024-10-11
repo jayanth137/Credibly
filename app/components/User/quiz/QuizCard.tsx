@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Lottie from 'react-lottie';
 
 const QuizCard = ({ videoId }: { videoId: string }) => {
   const [quizData, setQuizData] = useState<any>(null);
@@ -33,7 +34,17 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
   }, [videoId]);
 
   if (!quizData || !quizData.questions) {
-    return <p>Loading quiz...</p>;
+      return <div className='h-screen w-full flex items-center justify-center text-white flex-col gap-5 text-center'>
+          <Lottie options={{
+              animationData: require('@/public/Loader.json'),
+              loop: true,
+              autoplay: true,
+          }}
+              height={200}
+              width={200}
+          />
+          <h1 className='font-bold text-xl'>Please Hang on it may take up to a minute...</h1>
+      </div>
   }
 
   const handleClick = (selectedOption: string) => {
