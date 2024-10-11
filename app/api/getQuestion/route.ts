@@ -20,7 +20,7 @@ export async function POST(request: Request) {
         if (data.trim().startsWith("```json")) {
             data = data.replace(/```json|```/g, '').trim();
         }
-
+        console.log(data);
         const json = JSON.parse(data);
         console.log(json);
         const endTime = Date.now();
