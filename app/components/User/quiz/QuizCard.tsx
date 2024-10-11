@@ -116,20 +116,18 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
         <h3 className="text-white text-4xl font-semibold">{currentQuestion.question}</h3>
       </div>
 
-      {currentQuestion.options.map((opt: string, i: number) => (
+      {currentQuestion.options.map((opt: string, i: number) => ( // Mapping directly to string
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
           className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
             ? isCorrect
               ? 'bg-green-100 text-green-800 border-green-600'
               : 'bg-red-100 text-red-800 border-red-600'
             : 'hover:bg-gray-200 text-black'
             }`}
-          onClick={() => handleClick(opt)}
+          onClick={() => handleClick(opt)} // No need for `opt.option`, it's just a string
           style={{ pointerEvents: userAnswerForCurrent ? 'none' : 'auto' }}
         >
-          <p>{opt}</p>
           <p>{opt}</p>
         </div>
       ))}
