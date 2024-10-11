@@ -33,9 +33,9 @@ export default function Created() {
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <Button variant="outline" size="icon" className="rounded-full bg-white/10 hover:bg-white/20">
+                        {/* <Button variant="outline" size="icon" className="rounded-full bg-white/10 hover:bg-white/20">
                             <Play className="h-6 w-6" />
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{data.title}</h3>

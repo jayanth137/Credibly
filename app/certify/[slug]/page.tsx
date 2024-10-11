@@ -25,27 +25,62 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
     const [origin, setOrigin] = useState<string>()
     const [error, setError] = useState<string>()
     const [copied, setCopied] = useState<boolean>(false)
-    useEffect(() => {
-        fetchCertification()
-        setOrigin(window.location.origin)
-    }, [])
-    async function fetchCertification() {
-        const resp = await fetch('/api/getCertification/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cuid: slug })
-        })
-        if (resp.status != 200) {
-            setError('Invalid link provided')
-            return
-        }
-        const responseData = await resp.json()
-        // console.log(responseData)
-        setData(responseData)
+    // useEffect(() => {
+    //     fetchCertification()
+    //     setOrigin(window.location.origin)
+    // }, [])
+    // async function fetchCertification() {
+    //     const resp = await fetch('/api/getCertification/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ cuid: slug })
+    //     })
+    //     if (resp.status != 200) {
+    //         setError('Invalid link provided')
+    //         return
+    //     }
+    //     const responseData = await resp.json()
+    //     // console.log(responseData)
+    //     setData(responseData)
 
+    // }
+
+
+
+
+    useEffect(() => {
+        fetchCertification();
+        setOrigin(window.location.origin);
+    }, [slug]);
+    async function fetchCertification() {
+        try {
+            // Use the slug as the CID to fetch data from IPFS
+            const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${slug}`);
+
+            if (ipfsResp.status !== 200) {
+                setError('Failed to fetch data from IPFS');
+                return;
+            }
+
+            // Parse the IPFS data
+            const ipfsData = await ipfsResp.json();
+            console.log('IPFS data:', ipfsData);
+
+            // Set the data to state
+            setData(ipfsData);
+        } catch (err) {
+            setError('Failed to fetch certification data.');
+            console.error('Error fetching certification:', err);
+        }
     }
+
+
+
+
+
+
 
     if (error) {
         return <p>Error: {error}</p>
@@ -67,9 +102,9 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <Button variant="outline" size="icon" className="rounded-full bg-white/10 hover:bg-white/20">
+                                    {/* <Button variant="outline" size="icon" className="rounded-full bg-white/10 hover:bg-white/20">
                                         <Play className="h-6 w-6" />
-                                    </Button>
+                                    </Button> */}
                                 </div>
                             </div>
 
