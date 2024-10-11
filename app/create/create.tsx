@@ -14,6 +14,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks'
 import { setDataFromPlaylist, setDataFromVideo, setLink } from '@/redux/features/dataSlice'
 import { storeLink } from '@/lib/storeLink'
+import Lottie from 'react-lottie'
 
 function Create({ setCreated }) {
 
@@ -66,10 +67,20 @@ function Create({ setCreated }) {
         }
         // console.log(data)
     }
-    if (data == undefined) {
-        return <h1>Loading...</h1>
-    }
+    if (!data) {
 
+        return <div className='h-screen w-full flex items-center justify-center text-white flex-col gap-5 text-center'>
+            <Lottie options={{
+                animationData: require('@/public/Loader.json'),
+                loop: true,
+                autoplay: true,
+            }}
+                height={200}
+                width={200}
+            />
+            <h1 className='font-bold text-xl'>Awesome content is Loading...</h1>
+        </div>
+    }
     async function submitForm() {
         console.log(selected)
         if (category == 'playlists') {
@@ -228,7 +239,7 @@ function Create({ setCreated }) {
                         <h2 className="text-2xl font-bold mb-4">{selected?.snippet.title}</h2>
                         <div className="relative aspect-video bg-[#3a3b6b] rounded-lg overflow-hidden">
                             <img
-                                src={selected?.snippet.thumbnails.high.url}
+                                src={selected ? selected.snippet.thumbnails.high.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zZp15odxBOqO5n9rTcpSViEJSnQ3Pufegg&s'}
                                 alt="Video thumbnail"
                                 className="w-full h-full object-cover"
                             />
