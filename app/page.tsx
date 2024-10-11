@@ -1,28 +1,26 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Crown, Wallet } from "lucide-react"
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import Login from "./components/Login";
-import { redirect } from "next/navigation";
-import Logout from "./components/Logout";
-import Link from "next/link";
-import Logo from "@/components/logo";
-import Image from "next/image";
-import logo from '../app/assets/logo.svg'
-
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { Crown, Wallet } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import Login from './components/Login';
+import { redirect } from 'next/navigation';
+import Logout from './components/Logout';
+import Link from 'next/link';
+import Logo from '@/components/logo';
+import Image from 'next/image';
+import logo from '../app/assets/logo.svg';
 
 export default function Component() {
   const { data: session, status } = useSession();
   const [videos, setVideos] = useState<any[]>();
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
-    if (session) console.log(session)
-  }, [session])
-
+    if (session) console.log(session);
+  }, [session]);
 
   if (status === 'loading') {
     return <p>Loading...</p>;
@@ -44,14 +42,20 @@ export default function Component() {
             </h1>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
-            Watch, Pausss, and Mint<br />Your Success
+            Watch, Pausss, and Mint
+            <br />
+            Your Success
           </h2>
+
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4">
             <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-6 py-4 rounded-2xl">
               Mint Certificate
             </Button>
-            <Link href={'/login'} >
-              <Button variant="outline" className="border-white hover:bg-white/10 text-lg px-6 py-4 rounded-2xl">
+            <Link href={'/login'}>
+              <Button
+                variant="outline"
+                className="border-white hover:bg-white/10 bg-white text-black hover:text-white text-lg px-6 py-4 rounded-2xl"
+              >
                 Join as a creator
               </Button>
             </Link>
@@ -98,5 +102,5 @@ export default function Component() {
         </svg>
       </motion.div>
     </div>
-  )
+  );
 }
