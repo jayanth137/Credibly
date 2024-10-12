@@ -163,8 +163,10 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
                   <PayButton coinbaseBranded />
                   <PayStatus />
                 </Pay>
-                <button className="flex w-1/2 items-center justify-center gap-2 bg-[#3a3b6b] p-2 py-3 rounded-lg">
-                  Skip Payment for Testing{' '}
+                <button className="flex w-1/2 items-center justify-center gap-2 bg-[#3a3b6b] p-2 py-3 rounded-lg" onClick={() => {
+                  window.location.href = `/certify/${slug}/quiz`
+                }} >
+                  GO AHEAD WITH TEST{' '}
                 </button>
               </div>
             </div>

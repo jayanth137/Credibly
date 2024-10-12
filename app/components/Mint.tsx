@@ -19,6 +19,7 @@ const contractAddress = '0xCb39Bd9231cE0E0D2501D37Ec13F37678ba03b2C';
 const Mint = () => {
   const [isMinting, setIsMinting] = useState(false);
   const [metadataUri, setMetadataUri] = useState('');
+  const [isMintCompleted, setIsMintCompleted] = useState(false);
   const { address } = useAccount();
 
   const score = 100;
@@ -76,6 +77,7 @@ const Mint = () => {
         // Call your minting function here
         console.log('Minting NFT with URI:', uri);
         // await mintNFT(uri); // Replace this with your minting logic
+        setIsMintCompleted(true); // Hide button after successful minting
       }
     } catch (error) {
       console.error('Minting failed:', error);
@@ -88,13 +90,15 @@ const Mint = () => {
     <div className="flex">
       <div>
         {address ? (
-          <button
-            className="bg-white p-4"
-            onClick={handleMint}
-            disabled={isMinting} // Disable button while minting
-          >
-            {isMinting ? 'Minting in progress...' : 'Mint & Upload'}
-          </button>
+          !isMintCompleted && (
+            <button
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-xl text-white font-semibold rounded-2xl py-3 shadow-lg transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:scale-105 w-96 active:scale-95 disabled:opacity-50"
+              onClick={handleMint}
+              disabled={isMinting}
+            >
+              {isMinting ? 'Minting in progress...' : 'Mint & Upload'}
+            </button>
+          )
         ) : (
           <WalletWrapper
             className="w-[450px] max-w-full"
