@@ -26,7 +26,7 @@ const page = () => {
       name: 'Certificate of Achievement',
       description: `This certificate is awarded for achieving a score of ${score}`,
       image:
-        'https://ipfs.io/ipfs/Qmd4Eu89kUzPcmGCkeg8wmyYAPqbM18WRVP6cCjq4efqCj',
+        'https://ipfs.io/ipfs/QmXnW8kkd9QiJYx6ZCq3Bc6sCJF3M1nQ8fYjpLuSgSr9zm',
       attributes: [
         { trait_type: 'Score', value: score },
         { trait_type: 'Correct Answers', value: trueAnswer },

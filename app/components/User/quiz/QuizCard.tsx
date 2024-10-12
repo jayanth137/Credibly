@@ -1,6 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
+import mrDuck from '@/app/assets/mrDuck.svg';
+import { useAccount } from 'wagmi';
+import TransactionWrapper from '../../Wallet/TransactionWrapper';
+import WalletWrapper from '../../Wallet/WalletWrapper';
 
 const QuizCard = ({ videoId }: { videoId: string }) => {
   const [quizData, setQuizData] = useState<any>(null);
@@ -10,7 +14,9 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
   const [quizFinished, setQuizFinished] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<any>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [userAnswerForCurrent, setUserAnswerForCurrent] = useState<string | null>(null);
+  const [userAnswerForCurrent, setUserAnswerForCurrent] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -33,20 +39,6 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
     fetchQuizData();
   }, [videoId]);
 
-  if (!quizData || !quizData.questions) {
-      return <div className='h-screen w-full flex items-center justify-center text-white flex-col gap-5 text-center'>
-          <Lottie options={{
-              animationData: require('@/public/Loader.json'),
-              loop: true,
-              autoplay: true,
-          }}
-              height={200}
-              width={200}
-          />
-          <h1 className='font-bold text-xl'>Please Hang on it may take up to a minute...</h1>
-      </div>
-  }
-
   const handleClick = (selectedOption: string) => {
     if (userAnswers[currentQuestionIndex] !== undefined) return;
 
@@ -61,7 +53,7 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
     setUserAnswerForCurrent(selectedOption);
 
     if (isAnswerCorrect) {
-      setScore(prevScore => prevScore + 1);
+      setScore((prevScore) => prevScore + 1);
     }
 
     if (currentQuestionIndex < quizData.questions.length - 1) {
@@ -77,43 +69,84 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
     }
   };
 
+  // Badge assignment based on score percentage
+  const getBadge = (percentage: number) => {
+    if (percentage >= 80) return 'Gold';
+    if (percentage >= 60) return 'Silver';
+    if (percentage >= 40) return 'Bronze';
+    return 'No Badge';
+  };
+
   if (quizFinished) {
+    const totalQuestions = quizData.questions.length;
+    const correctAnswers = score;
+    const wrongAnswers = totalQuestions - correctAnswers;
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    const badge = getBadge(percentage);
+
+    const address = useAccount();
+
     return (
       <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
-        <h1 className="text-white text-4xl font-semibold">Quiz Completed!</h1>
-        <p className="text-gray-300 text-lg mt-4">
-          Your final score is: <strong className="text-white">{score}/{quizData.questions.length}</strong>
-        </p>
+        <div className="h-screen bg-gradient-to-br from-[#1a1b3b] to-[#000031] text-white overflow-hidden flex justify-evenly items-center mt-12">
+          <div className="bg-slate-600 p-4 rounded-3xl space-y-6 ">
+            <img
+              src={mrDuck.src}
+              alt="mr duck"
+              className="mb-4 object-contain w-[473px] h-[277px]"
+            />
+            <div>
+              {' '}
+              {address ? (
+                <TransactionWrapper address={address} />
+              ) : (
+                <WalletWrapper
+                  className="w-[450px] max-w-full"
+                  text="Sign in to transact"
+                />
+              )}
+            </div>
+          </div>
 
-        <table className="table-auto w-full mt-6 bg-white rounded-lg">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="px-4 py-2">Question</th>
-              <th className="px-4 py-2">Your Answer</th>
-              <th className="px-4 py-2">Correct Answer</th>
-              <th className="px-4 py-2">Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            {quizData.questions.map((q: any, i: number) => (
-              <tr key={i} className="border-b">
-                <td className="px-4 py-2">{q.question}</td>
-                <td className={`px-4 py-2 ${userAnswers[i] === q.correct ? 'text-green-600' : 'text-red-600'}`}>
-                  {userAnswers[i]}
-                </td>
-                <td className="px-4 py-2">{q.correct}</td>
-                <td className="px-4 py-2">
-                  {userAnswers[i] === q.correct ? (
-                    <span className="text-green-600 font-semibold">Correct</span>
-                  ) : (
-                    <span className="text-red-600 font-semibold">Wrong</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div className="flex flex-col items-center justify-center text-center">
+            <h3 className="w-24 h-24 bg-[#E5B622] rounded-full flex justify-center items-center font-bold text-4xl ">
+              74
+            </h3>
+            <h2 className="mt-4">You have successfully completed</h2>
+            <div className="mt-2">
+              <h2>Achievement Level:</h2>
+              <h2 className="text-yellow-400 text-2xl font-bold">
+                {badge}
+              </h2>{' '}
+              {/* This will show the badge */}
+            </div>
+            <h2 className="mt-4">
+              Number of correct answers: {correctAnswers}
+            </h2>
+            <h2>Number of wrong answers: {totalQuestions - correctAnswers}</h2>
+            <h2>Total number of questions: {totalQuestions}</h2>
+          </div>
+        </div>
       </section>
+    );
+  }
+
+  if (!quizData || !quizData.questions) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center text-white flex-col gap-5 text-center">
+        <Lottie
+          options={{
+            animationData: require('@/public/Loader.json'),
+            loop: true,
+            autoplay: true,
+          }}
+          height={200}
+          width={200}
+        />
+        <h1 className="font-bold text-xl">
+          Please Hang on it may take up to a minute...
+        </h1>
+      </div>
     );
   }
 
@@ -124,19 +157,22 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
       </h3>
 
       <div className="flex items-start space-x-3 text-base md:text-lg mb-6">
-        <h3 className="text-white text-4xl font-semibold">{currentQuestion.question}</h3>
+        <h3 className="text-white text-4xl font-semibold">
+          {currentQuestion.question}
+        </h3>
       </div>
 
-      {currentQuestion.options.map((opt: string, i: number) => ( // Mapping directly to string
+      {currentQuestion.options.map((opt: string, i: number) => (
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
-            ? isCorrect
-              ? 'bg-green-100 text-green-800 border-green-600'
-              : 'bg-red-100 text-red-800 border-red-600'
-            : 'hover:bg-gray-200 text-black'
-            }`}
-          onClick={() => handleClick(opt)} // No need for `opt.option`, it's just a string
+          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${
+            userAnswerForCurrent === opt
+              ? isCorrect
+                ? 'bg-green-100 text-green-800 border-green-600'
+                : 'bg-red-100 text-red-800 border-red-600'
+              : 'hover:bg-gray-200 text-black'
+          }`}
+          onClick={() => handleClick(opt)}
           style={{ pointerEvents: userAnswerForCurrent ? 'none' : 'auto' }}
         >
           <p>{opt}</p>
@@ -147,11 +183,13 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
         <p className="mt-4 text-gray-300">
           {isCorrect ? (
             <>
-              <strong className="text-green-400">Correct!</strong> The answer is: {currentQuestion.correct}
+              <strong className="text-green-400">Correct!</strong> The answer
+              is: {currentQuestion.correct}
             </>
           ) : (
             <>
-              <strong className="text-red-400">Wrong!</strong> The correct answer is: {currentQuestion.correct}
+              <strong className="text-red-400">Wrong!</strong> The correct
+              answer is: {currentQuestion.correct}
             </>
           )}
         </p>
