@@ -138,9 +138,11 @@ Your app should be running on [http://localhost:3000](http://localhost:3000).
 
 ## ✍️ Authors <a name="authors"></a>
 
-- **Kartik Aslia** - Initial work and idea
+- **Kartik Aslia**
+- **Jayanth**
+- **Kaushik**
 
-See the list of [contributors](https://github.com/your-repo/contributors) who participated in this project.
+See the list of [contributors](https://github.com/jayanth137/Credibly/contributors) who participated in this project.
 
 ## 🎉 Acknowledgments <a name="acknowledgments"></a>
 
