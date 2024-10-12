@@ -5,6 +5,7 @@ import mrDuck from '@/app/assets/mrDuck.svg';
 import { useAccount } from 'wagmi';
 import TransactionWrapper from '../../Wallet/TransactionWrapper';
 import WalletWrapper from '../../Wallet/WalletWrapper';
+import Mint from '../../Mint';
 
 const QuizCard = ({ videoId }: { videoId: string }) => {
   const [quizData, setQuizData] = useState<any>(null);
@@ -84,8 +85,6 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
     const percentage = (correctAnswers / totalQuestions) * 100;
     const badge = getBadge(percentage);
 
-    const address = useAccount();
-
     return (
       <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
         <div className="h-screen bg-gradient-to-br from-[#1a1b3b] to-[#000031] text-white overflow-hidden flex justify-evenly items-center mt-12">
@@ -96,21 +95,13 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
               className="mb-4 object-contain w-[473px] h-[277px]"
             />
             <div>
-              {' '}
-              {address ? (
-                <TransactionWrapper address={address} />
-              ) : (
-                <WalletWrapper
-                  className="w-[450px] max-w-full"
-                  text="Sign in to transact"
-                />
-              )}
+              <Mint />{' '}
             </div>
           </div>
 
           <div className="flex flex-col items-center justify-center text-center">
             <h3 className="w-24 h-24 bg-[#E5B622] rounded-full flex justify-center items-center font-bold text-4xl ">
-              74
+              {percentage}
             </h3>
             <h2 className="mt-4">You have successfully completed</h2>
             <div className="mt-2">

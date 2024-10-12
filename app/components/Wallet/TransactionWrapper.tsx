@@ -17,19 +17,24 @@ import {
   mintContractAddress,
 } from '../../constants';
 
-export default function TransactionWrapper({ address }: { address: Address }) {
-  const nftMetadataURI = 'https://example.com/nft-metadata';
+export default function TransactionWrapper({
+  address,
+  metadataUri,
+}: {
+  address: Address;
+  metadataUri: string;
+}) {
   const contracts = [
     {
       address: mintContractAddress,
       abi: mintABI,
       functionName: 'mintTo',
-      args: [address, nftMetadataURI],
+      args: [address, metadataUri],
     },
   ] as unknown as ContractFunctionParameters[];
 
   console.log(address); // Check if it's valid
-  console.log(nftMetadataURI); // Ensure URI is properly set
+  console.log(metadataUri); // Ensure URI is properly set
 
   const handleError = (err: TransactionError) => {
     console.error('Transaction error:', err);
