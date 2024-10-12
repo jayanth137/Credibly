@@ -1,177 +1,148 @@
-<p align="center">
-  <a href="" rel="noopener">
-    <img src="https://i.imgur.com/AZ2iWek.png" alt="Credibily logo"></a>
-</p>
+# Credibily
 
-<h3 align="center">Credibily</h3>
+<p align="center">
+  <img src="https://i.imgur.com/AZ2iWek.png" alt="Project Logo" />
+</p>
+<h3 align="center">A platform for validating YouTube learning with AI-generated quizzes and certificates</h3>
 
 <div align="center">
 
-[![Hackathon](https://img.shields.io/badge/hackathon-BASED_INDIA-orange.svg)](http://hackathon.url.com)  
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()  
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![Hackathon](https://img.shields.io/badge/hackathon-BASED_INDIA-orange.svg)](http://hackathon.url.com)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/jayanth137/Credibly)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jayanth137/Credibly/blob/main/LICENSE.md)
+[![Repo Size](https://img.shields.io/github/repo-size/jayanth137/Credibly)](https://github.com/jayanth137/Credibly)
+[![GitHub Issues](https://img.shields.io/github/issues/jayanth137/Credibly)](https://github.com/jayanth137/Credibly/issues)
 
 </div>
 
----
-
-<p align="center"> Credibily is a platform that empowers YouTube creator-teachers to create interactive courses for their educational videos. It allows them to offer quizzes and mint certificates for learners, leveraging AI for assessment generation and IPFS for decentralized storage.
-    <br>
-</p>
-
 ## 📝 Table of Contents
-
-- [Problem Statement](#problem_statement)
-- [Idea / Solution](#idea)
-- [Usage](#usage)
-- [Disclaimer](#disclaimer)
-- [Flowchart](#flowchart)
-- [Future Scope](#future_scope)
-- [Setting up a local environment](#getting_started)
-- [Technology Stack](#tech_stack)
-- [Dependencies / Limitations](#limitations)
+- [Problem Statement](#problem-statement)
+- [Idea / Solution](#idea--solution)
+- [User Flow](#user-flow)
+- [Creator Flow](#creator-flow)
+- [Roadmap](#roadmap)
+- [Setting up a Local Environment](#setting-up-a-local-environment)
+- [Technology Stack](#technology-stack)
+- [Dependencies / Limitations](#dependencies--limitations)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 
----
+## 🧐 Problem Statement <a name="problem-statement"></a>
 
-## 🧐 Problem Statement <a name = "problem_statement"></a>
+**IDEAL**: Learners from YouTube often do not have a structured way to validate their knowledge or showcase their learning. The ideal solution is a platform that allows them to validate their understanding through quizzes or projects, with certificates that can be minted as NFTs.
 
-### IDEAL:
-Learners who consume educational content on YouTube do not currently have a way to validate or showcase their learning. There’s a need for a system where they can not only follow along with content but also take assessments and receive verifiable certificates.
+**REALITY**: Currently, there is no seamless method for YouTube learners to authenticate their learning and get certificates for it. Course creators, especially those on YouTube, struggle to assess learner understanding without creating custom quizzes or validation systems.
 
-### REALITY:
-Many learners acquire valuable skills from YouTube, but they have no formal recognition for their efforts. YouTube content creators, especially those teaching technical or academic subjects, have no easy way to offer structured courses or assessments.
+**CONSEQUENCES**: Without a platform like this, learners miss out on the opportunity to validate their skills learned through YouTube, and creators lack an additional revenue stream.
 
-### CONSEQUENCES:
-Without a way to validate learning, YouTube learners are unable to prove their skills in formal environments, such as job applications or academic settings. Creators, too, are missing opportunities to monetize structured courses or offer added value to their audience.
+## 💡 Idea / Solution <a name="idea--solution"></a>
+Credibily is a platform that empowers YouTube creators to create courses from their learning videos. Creators can simply log in with their Google account, select a YouTube video, and configure the course by adding descriptions, tags, and assessment methods. Our AI generates a quiz (10 MCQs) for each user attempting to validate their learning, ensuring no questions are repeated, and that fairness is maintained.
 
----
+Once the course is created, a shareable link is generated that the creator can add to their YouTube video description. Learners can click on this link, complete the quiz or other validation methods, and mint a certificate if they meet the creator-set criteria. This certificate can be minted as an NFT and shared as proof of learning.
 
-## 💡 Idea / Solution <a name = "idea"></a>
+## 🔀 **User Flow** <a name="user-flow"></a>
+![User Flow](flowcharts/User%20Flow.png)
 
-Credibily is a platform for YouTube creators who teach and want to offer their audience a way to validate their learning. Creators can log in using their Google account, select the video they want to create a course for, fill in details like descriptions, tags, and assessments. 
+## 🔀 Creator Flow <a name="creator-flow"></a>
+![Creator Flow](flowcharts/Creator%20Flow.png)
 
-For now, Credibily supports AI-generated quizzes, but in the future, we will add project-based evaluations via GitHub and peer-to-peer reviews. Once the creator completes the course creation, a unique link is generated, which can be added to the YouTube video description. Viewers can follow the link, take the AI-generated quiz, and if they pass the set criteria, they can mint a certificate to showcase their learning.
+## 🚀 Roadmap <a name="roadmap"></a>
 
----
+### 3-Month Goals
+- Add project-based evaluation via GitHub integration.
+- Implement peer-to-peer assessments.
+- Expand quiz question types beyond MCQs (e.g., coding challenges).
+- Streamline Google Auth API for faster course creation.
+- Enhance UI for easier course management.
 
-## ⛓️ Dependencies / Limitations <a name = "limitations"></a>
-
-- **Quiz Method Feasibility**: While the quiz method works well, not all learning types may fit a multiple-choice format.
-- **Monetary Benefits**: Needs further discussion on how creators can monetize and the impact on user affordability.
-- **Gmail Requirement**: Users and creators must log in with Google accounts, and videos must have transcripts uploaded.
-- **Quiz Types**: Currently only supporting quizzes, but project-based evaluations and peer assessments will come in the future.
-
----
-
-## 🚀 Future Scope <a name = "future_scope"></a>
-
-- **Project-based evaluations**: Integration with GitHub for submitting projects and validating learning through code.
-- **Peer-to-peer assessments**: Learners evaluating each other’s projects for greater engagement.
-- **Expanded assessment types**: Add variety to the current quizzes by introducing case studies, subjective questions, etc.
-- **Additional blockchain integration**: Beyond certificates, exploring how to tokenize course achievements and build creator economies.
-
----
-
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will help you set up the project on your local machine for development and testing purposes.
+### 6-Month Goals
+- Develop a mobile app to increase accessibility for creators and learners.
+- Introduce additional validation methods (e.g., peer reviews).
+- Implement creator dashboards for detailed analytics on learner performance.
+- Integrate a more advanced AI model for dynamic quiz generation based on learner history.
+- Expand to other platforms besides YouTube (e.g., Twitch or Udemy).
+  
+## 🏁 Setting up a Local Environment <a name="setting-up-a-local-environment"></a>
 
 ### Prerequisites
 
-Ensure you have the following installed on your machine:
-
-- Node.js and npm
+Ensure you have the following installed:
+- Node.js (v16+)
+- npm or yarn
 - MongoDB
-- React
-- IPFS
-
-```bash
-# Install Node.js and npm
-sudo apt install nodejs npm
-
-# Install MongoDB
-sudo apt install mongodb
-
-# Set up IPFS
-npm install ipfs
-ipfs init
-ipfs daemon
-```
+- Pinata for IPFS integration
+- Solidity (for smart contract interactions)
+- GAuth credentials for Google authentication
 
 ### Installing
 
-1. **Clone the repository**:
+Clone the repository and navigate into it:
 
-   ```bash
-   git clone https://github.com/your-repo/Credibily.git
-   cd Credibily
-   ```
+```bash
+git clone https://github.com/your-repo/credibily.git
+cd credibily
+```
 
-2. **Install dependencies**:
+Install dependencies:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. **Start the development server**:
+Create a `.env` file and add the following:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+GAUTH_CLIENT_ID=your_google_auth_client_id
+GAUTH_CLIENT_SECRET=your_google_auth_secret
+MONGO_URI=your_mongodb_uri
+PINATA_API_KEY=your_pinata_key
+PINATA_SECRET_API_KEY=your_pinata_secret
+```
 
----
+Run the development server:
 
-## 🎈 Usage <a name="usage"></a>
+```bash
+npm run dev
+```
 
-1. **Creator Flow**:
-   - Login via Google (OAuth).
-   - Select the YouTube video for the course.
-   - Add course details such as description, tags, and quiz type (currently only MCQs).
-   - Share the generated course link on the YouTube description for users.
+Your app should be running on [http://localhost:3000](http://localhost:3000).
 
-2. **User Flow**:
-   - Click on the course link in the YouTube video description.
-   - Pay the course fee.
-   - Take the AI-generated quiz (no repeated questions).
-   - Mint the certificate if the passing criteria are met.
 
----
+## ⛏️ Technology Stack <a name="technology-stack"></a>
 
-## 🔄 Flowchart <a name="flowchart"></a>
+- **React.js** - Frontend
+- **Tailwind CSS** - Styling
+- **IPFS via Pinata** - For storing quiz metadata and NFT certificates
+- **Solidity** - For smart contract interactions with NFTs
+- **Next.js** - SSR and API routes
+- **Express.js** - Backend framework
+- **TypeScript** - Type safety
+- **Google OAuth** - For authentication
+- **Prisma** - ORM for database management
+- **Pinata** - IPFS file storage
 
-1. **Creator Flow**:
-   - Google OAuth for login → Select YouTube video → Fill course details → Generate course link → Share on YouTube.
+## ⛓️ Dependencies / Limitations <a name="dependencies--limitations"></a>
 
-2. **User Flow**:
-   - Click course link → Pay fee → Take quiz → Pass quiz → Mint certificate.
+### Dependencies
+- Google API for video transcript extraction
+- MongoDB for database management
+- Pinata for IPFS storage of certificates and metadata
+- Solidity for NFT smart contracts
+- Prisma for efficient database management
+- AI Model for quiz generation
 
-*Flowcharts will be added as part of the project documentation.*
+### Limitations
+- AI-generated quizzes are currently limited to MCQ format.
+- Limited customization options for certificates at this stage.
+- Dependency on YouTube for transcript extraction could be limited by video format or availability.
 
----
+## ✍️ Authors <a name="authors"></a>
 
-## ⛏️ Built With <a name = "tech_stack"></a>
+- **Kartik Aslia** - Initial work and idea
 
-- **React**: Frontend framework for building user interfaces.
-- **Tailwind CSS**: Utility-first CSS framework for fast UI development.
-- **IPFS**: Decentralized storage for certificates and quizzes.
-- **MongoDB**: Database for storing user, course, and certificate data.
-- **Node.js**: Backend framework to manage server-side functionality.
-- **Express.js**: Web application framework for Node.js.
+See the list of [contributors](https://github.com/your-repo/contributors) who participated in this project.
 
----
+## 🎉 Acknowledgments <a name="acknowledgments"></a>
 
-## ✍️ Authors <a name = "authors"></a>
+We require users' Google account details to access YouTube transcripts and facilitate course creation. Special thanks to all contributors and hackathon supporters!
 
-- [@Kartik Aslia](https://github.com/kartik) - Concept & Initial Work
-
----
-
-## 🎉 Acknowledgments <a name = "acknowledgments"></a>
-
-- Special thanks to all contributors and the open-source community for their support.
-
----
-
-This README provides a comprehensive overview of **Credibily**, the platform for creating YouTube-based courses, AI quizzes, and certificate minting. Would you like to dive deeper into any specific section or include more technical details?
