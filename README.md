@@ -67,7 +67,7 @@ Once the course is created, a shareable link is generated that the creator can a
 ### Prerequisites
 
 Ensure you have the following installed:
-- Node.js (v16+)
+- Node.js (v20+)
 - npm or yarn
 - MongoDB
 - Pinata for IPFS integration
@@ -79,7 +79,7 @@ Ensure you have the following installed:
 Clone the repository and navigate into it:
 
 ```bash
-git clone https://github.com/your-repo/credibily.git
+git clone https://github.com/jayanth137/Credibly.git
 cd credibily
 ```
 
@@ -92,11 +92,18 @@ npm install
 Create a `.env` file and add the following:
 
 ```bash
+NEXT_PUBLIC_YOUTUBE_API_KEY=your_youtube_api_key
 GAUTH_CLIENT_ID=your_google_auth_client_id
 GAUTH_CLIENT_SECRET=your_google_auth_secret
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 MONGO_URI=your_mongodb_uri
+DATABASE_URL=your_database_url
 PINATA_API_KEY=your_pinata_key
-PINATA_SECRET_API_KEY=your_pinata_secret
+PINATA_JWT=your_pinata_jwt
+NEXT_PUBLIC_GATEWAY_URL=your_gateway_url
+NEXT_PUBLIC_CDP_API_KEY=your_cdp_api_key
+NEXT_PUBLIC_WC_PROJECT_ID=your_wc_project_id
+PAYMASTER_AND_BUNDLER_ENDPOINT=your_paymaster_and_bundler_endpoint
 ```
 
 Run the development server:
