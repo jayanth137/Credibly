@@ -14,17 +14,21 @@ const headers = {
   pinata_secret_api_key: pinataSecretApiKey!,
 };
 
-const contractAddress = '0xCb39Bd9231cE0E0D2501D37Ec13F37678ba03b2C';
+interface MintProps {
+  score: number;
+  trueAnswer: string;
+  badge: string;
+}
 
-const Mint = () => {
+const Mint = ({ score, trueAnswer, badge }: MintProps) => {
   const [isMinting, setIsMinting] = useState(false);
   const [metadataUri, setMetadataUri] = useState('');
   const [isMintCompleted, setIsMintCompleted] = useState(false);
   const { address } = useAccount();
 
-  const score = 100;
-  const trueAnswer = 10;
-  const falseAnswer = 0;
+  // const score = 100;
+  // const trueAnswer = 10;
+  // const falseAnswer = 0;
 
   const uploadMetadata = async () => {
     const metadata = {
@@ -35,7 +39,7 @@ const Mint = () => {
       attributes: [
         { trait_type: 'Score', value: score },
         { trait_type: 'Correct Answers', value: trueAnswer },
-        { trait_type: 'Incorrect Answers', value: falseAnswer },
+        { trait_type: 'Badge', value: badge },
       ],
     };
 

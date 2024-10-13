@@ -53,7 +53,7 @@ const page = () => {
     <div className="flex justify-center items-center m-auto">
       <QuizCard videoId={data.videoId} />
     </div>
-  );
+  )
 };
 
 export default page;
