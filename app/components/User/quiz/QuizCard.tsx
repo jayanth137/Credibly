@@ -95,7 +95,11 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
               className="mb-4 object-contain w-[473px] h-[277px]"
             />
             <div>
-              <Mint />{' '}
+              <Mint
+                score={percentage}
+                trueAnswer={correctAnswers}
+                badge={badge}
+              />
             </div>
           </div>
 
