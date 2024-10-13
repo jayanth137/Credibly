@@ -51,7 +51,7 @@ const page = () => {
   }
   return (
     <div className="flex justify-center items-center m-auto">
-      <QuizCard videoId={data.videoId} />
+      <QuizCard videoId={data.videoId} name={data.title} author={data.author} />
     </div>
   )
 };

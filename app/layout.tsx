@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import './styles.css'
 import AuthProvider from './AuthProvider';
 import Navbar from './components/Navbar';
 import { Provider } from 'react-redux';

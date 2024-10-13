@@ -7,10 +7,22 @@ import { base } from 'viem/chains';
 import { WagmiProvider } from 'wagmi';
 import { NEXT_PUBLIC_CDP_API_KEY } from '../../config';
 import { useWagmiConfig } from '../../wagmi';
+import { createPortal } from 'react-dom';
 
 type Props = { children: ReactNode };
 
 const queryClient = new QueryClient();
+
+function ModalPortal({ children }: Props) {
+  // Ensure the modal renders at the top level of the DOM with a higher z-index
+  return createPortal(
+    <div style={{ zIndex: 9999 }}>
+      {children}
+    </div>,
+    document.body // Render it outside of the normal component tree
+  );
+}
+
 
 function OnchainProviders({ children }: Props) {
   const wagmiConfig = useWagmiConfig();
@@ -19,9 +31,11 @@ function OnchainProviders({ children }: Props) {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <OnchainKitProvider apiKey={NEXT_PUBLIC_CDP_API_KEY} chain={base}>
-          <RainbowKitProvider modalSize="compact">
-            {children}
-          </RainbowKitProvider>
+          <ModalPortal>
+            <RainbowKitProvider modalSize="compact">
+              {children}
+            </RainbowKitProvider>
+          </ModalPortal>
         </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

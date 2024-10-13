@@ -7,7 +7,7 @@ import TransactionWrapper from '../../Wallet/TransactionWrapper';
 import WalletWrapper from '../../Wallet/WalletWrapper';
 import Mint from '../../Mint';
 
-const QuizCard = ({ videoId }: { videoId: string }) => {
+const QuizCard = ({ videoId, name, author }: { videoId: string, name: string, author: string }) => {
   const [quizData, setQuizData] = useState<any>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -99,6 +99,8 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
                 score={percentage}
                 trueAnswer={correctAnswers}
                 badge={badge}
+                title={name}
+                author={author}
               />
             </div>
           </div>
@@ -147,6 +149,7 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
 
   return (
     <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
+      {/* <h1 className='w-full text-4xl font-bold text-center my-3 text-white'>{name}</h1> */}
       <h3 className="text-white text-sm font-semibold">
         Question {currentQuestionIndex + 1}/{quizData.questions.length}
       </h3>
@@ -156,17 +159,15 @@ const QuizCard = ({ videoId }: { videoId: string }) => {
           {currentQuestion.question}
         </h3>
       </div>
-
       {currentQuestion.options.map((opt: string, i: number) => (
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${
-            userAnswerForCurrent === opt
-              ? isCorrect
-                ? 'bg-green-100 text-green-800 border-green-600'
-                : 'bg-red-100 text-red-800 border-red-600'
-              : 'hover:bg-gray-200 text-black'
-          }`}
+          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
+            ? isCorrect
+              ? 'bg-green-100 text-green-800 border-green-600'
+              : 'bg-red-100 text-red-800 border-red-600'
+            : 'hover:bg-gray-200 text-black'
+            }`}
           onClick={() => handleClick(opt)}
           style={{ pointerEvents: userAnswerForCurrent ? 'none' : 'auto' }}
         >

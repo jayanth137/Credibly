@@ -16,11 +16,13 @@ const headers = {
 
 interface MintProps {
   score: number;
-  trueAnswer: string;
+  trueAnswer: number;
   badge: string;
+  title: string
+  author: string
 }
 
-const Mint = ({ score, trueAnswer, badge }: MintProps) => {
+const Mint = ({ score, trueAnswer, badge, title, author }: MintProps) => {
   const [isMinting, setIsMinting] = useState(false);
   const [metadataUri, setMetadataUri] = useState('');
   const [isMintCompleted, setIsMintCompleted] = useState(false);
@@ -32,8 +34,8 @@ const Mint = ({ score, trueAnswer, badge }: MintProps) => {
 
   const uploadMetadata = async () => {
     const metadata = {
-      name: 'Certificate of Achievement',
-      description: `This certificate is awarded for achieving a score of ${score}`,
+      name: { title },
+      description: `This certificate is awarded for achieving a score of ${score} by watching the course of ${author}`,
       image:
         'https://ipfs.io/ipfs/QmXnW8kkd9QiJYx6ZCq3Bc6sCJF3M1nQ8fYjpLuSgSr9zm', // Example IPFS image
       attributes: [
