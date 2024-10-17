@@ -8,8 +8,7 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl
     // console.log(`admin = ${process.env.ADMIN_ACCOUNT}`)
 
-
-    if (!token && (url.pathname.startsWith('/create'))) {
+    if (!token && ((url.pathname.startsWith('/create')) || (url.pathname.startsWith('/dashboard')))) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 
@@ -22,5 +21,6 @@ export const config = {
     matcher: [
         '/create',
         '/login',
+        '/dashboard'
     ]
 }

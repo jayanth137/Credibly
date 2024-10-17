@@ -21,7 +21,9 @@ model Creator {
 
 model Videos {
   cid       String  @id
-  url       String  @unique
+  url       String
   creatorId String
   creator   Creator @relation(fields: [creatorId], references: [youtubeId])
+
+  @@unique([url, creatorId])
 }

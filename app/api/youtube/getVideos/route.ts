@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     try {
         // const uploads = await getUploadsId(accessToken)
         const channelDetails = await getChannelDetails(accessToken)
-        const videos = await getUploadedVideos(channelDetails.uploads)
+        const videos = await getUploadedVideos((channelDetails as any).uploads as string)
         const playlists = await getPlaylists(accessToken)
 
         return NextResponse.json({
@@ -89,7 +89,8 @@ async function getChannelDetails(accessToken: string) {
                 profile: response.data.items[0].snippet?.thumbnails?.high?.url,
                 banner: response.data.items[0].brandingSettings?.image?.bannerExternalUrl,
                 uploads: response.data.items[0].contentDetails?.relatedPlaylists?.uploads,
-                name: response.data.items[0].snippet?.title
+                name: response.data.items[0].snippet?.title,
+                // description: response.data.items[0].snippet?.description
             }
         }
         return ans;

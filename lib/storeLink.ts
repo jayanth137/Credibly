@@ -59,7 +59,10 @@ export async function storeLink(
         const prisma = new PrismaClient()
         const videoExists = await prisma.videos.findUnique({
             where: {
-                url: url
+                url_creatorId: {
+                    url: url,
+                    creatorId: channelDetails.youtubeId as string,
+                }
             }
         })
         if (videoExists) {
