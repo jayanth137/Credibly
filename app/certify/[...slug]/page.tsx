@@ -65,7 +65,7 @@ const SlugPage: FC<{ params: Params }> = ({ params }) => {
   async function fetchCertification() {
     try {
       // Use the slug as the CID to fetch data from IPFS
-      const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${slug}`);
+      // const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${slug}`);
 
       if (ipfsResp.status !== 200) {
         setError('Failed to fetch data from IPFS');

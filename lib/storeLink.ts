@@ -1,61 +1,19 @@
-// import { PlaylistItem } from "@/app/types/playlist";
-// import { VideoEntity } from "@/app/types/videos";
-// import { PrismaClient } from '@prisma/client'
-// import { pinata } from "@/utils/config";
-
-// export async function storeLink(data: PlaylistItem | VideoEntity, tags: string[], validation: string) {
-//     const title = data.snippet.title;
-//     const description = data.snippet.description;
-//     const author = data.snippet.channelTitle
-//     let itemtype: "playlist" | "video" = data.kind == "youtube#playlist" ? "playlist" : "video"
-//     let videoId = itemtype == "playlist" ? (data as PlaylistItem).id : (data as VideoEntity).snippet.resourceId.videoId
-
-//     const thumbnail = data.snippet.thumbnails.high.url
-//     // const prisma = new PrismaClient()
-
-//     // const newLink = await prisma.links.create({
-//     //     data: {
-//     //         // id: cuid(), 
-//     //         title,
-//     //         description,
-//     //         author,
-//     //         tags: tags,
-//     //         thumbnail: thumbnail,
-//     //         validation: validation,
-//     //         videoId: videoId,
-//     //         type: itemtype
-//     //     },
-//     // });
-
-//     const uploadData = await pinata.upload.json({
-//         title: title,
-//         description: description,
-//         author: author,
-//         tags: tags,
-//         thumbnail: thumbnail,
-//         validation: validation,
-//         videoId: videoId,
-//         type: itemtype
-//     }, {
-//         metadata: {
-//             name: videoId
-//         }
-//     })
-//     console.log(uploadData)
-
-//     return uploadData.cid;
-// }
-
-
-
 import { PlaylistItem } from '@/app/types/playlist';
 import { VideoEntity } from '@/app/types/videos';
-import { pinata } from '@/utils/config';
+import { PrismaClient } from '@prisma/client';
+
 
 export async function storeLink(
     data: PlaylistItem | VideoEntity,
     tags: string[],
-    validation: string
+    validation: string,
+    channelDetails: {
+        youtubeId: string | undefined;
+        profile: string | undefined;
+        banner: string | undefined;
+        uploads: string | undefined;
+        name: string
+    },
 ) {
     const title = data.snippet.title;
     const description = data.snippet.description;
@@ -90,8 +48,27 @@ export async function storeLink(
         pinata_api_key: pinataApiKey!,
         pinata_secret_api_key: pinataSecretApiKey!,
     };
+    const url = data.snippet.title.replaceAll(/\s/g, '_')
+
+
 
     try {
+
+
+        // if url already exists then return old url
+        const prisma = new PrismaClient()
+        const videoExists = await prisma.videos.findUnique({
+            where: {
+                url: url
+            }
+        })
+        if (videoExists) {
+            return (videoExists.creatorId.slice(1) + '/' + videoExists.url);
+        }
+
+
+
+
         // Make a POST request directly to Pinata's JSON upload endpoint
         const response = await fetch(
             'https://api.pinata.cloud/pinning/pinJSONToIPFS',
@@ -107,14 +84,47 @@ export async function storeLink(
         }
 
         const result = await response.json();
-        console.log('Upload successful:', result);
+        // console.log('Upload successful:', result);
 
         const cid = result.IpfsHash;
 
-        return cid;
+
+        // const resp = await prisma.creator.create({
+        //     data: {
+        //         name: channelDetails.name as string,
+        //         youtubeId: channelDetails.youtubeId as string,
+        //     }
+        // })
+
+        // console.log('channel details: ', channelDetails)
+        const creator = await prisma.creator.findUnique({
+            where: {
+                youtubeId: channelDetails.youtubeId
+            }
+        })
+        // console.log(creator);
+        if (!creator) {
+            await prisma.creator.create({
+                data: {
+                    name: channelDetails.name as string,
+                    youtubeId: channelDetails.youtubeId as string
+                }
+            })
+        }
+
+        const video = await prisma.videos.create({
+            data: {
+                cid: cid,
+                url: url,
+                creatorId: channelDetails.youtubeId,
+            }
+        })
+        console.log(video)
+
+        return (video.creatorId.slice(1) + '/' + video.url);
         // Pinata returns the CID in IpfsHash
     } catch (error) {
-        console.error('Error uploading to Pinata:', error);
-        throw new Error('Failed to upload data to Pinata');
+        console.error(error);
+        throw new Error(error.message);
     }
 }

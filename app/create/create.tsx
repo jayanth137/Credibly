@@ -17,11 +17,18 @@ import { storeLink } from '@/lib/storeLink'
 import Lottie from 'react-lottie'
 import Image from 'next/image'
 
-function Create({ setCreated }) {
+function Create({ setCreated }: { setCreated: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const [data, setData] = useState<{
         videos: VideoEntity[],
         playlists: PlaylistItem[]
+        channelDetails: {
+            youtubeId: string | undefined;
+            profile: string | undefined;
+            banner: string | undefined;
+            uploads: string | undefined;
+            name: string
+        }
     } | undefined>()
     const [error, setError] = useState<string>()
     const [category, setCategory] = useState<'playlists' | 'videos'>('videos')
@@ -97,7 +104,7 @@ function Create({ setCreated }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ data: selected, tags: tags, validation: 'quiz' }),
+                body: JSON.stringify({ data: selected, tags: tags, validation: 'quiz', channelDetails: data?.channelDetails }),
             });
             console.log(response)
             if (!response.ok) {
@@ -176,26 +183,6 @@ function Create({ setCreated }) {
                                 </SelectContent>
                             </Select>
                         }
-                        {/* <Select onValueChange={(val) => {
-                            const value = parseInt(val)
-                            const selectedValue = data[category][value]
-                            console.log(selectedValue)
-                            console.log(selectedValue)
-                            setSelected(selectedValue)
-                            console.log(selected)
-                        }}>
-                            <SelectTrigger className="w-full mt-1 bg-[#3a3b6b]/50 border-[#4a4b7b]">
-                                <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent >
-                                {
-                                    data &&
-                                    data[category].map((item, idx) => {
-                                        return <SelectItem key={idx} value={idx.toString()} >{item.snippet.title}</SelectItem>
-                                    })
-                                }
-                            </SelectContent>
-                        </Select> */}
                     </div>
                     <div>
                         <Label htmlFor="title">Enter Title</Label>
@@ -212,9 +199,6 @@ function Create({ setCreated }) {
                     <div>
                         <Label>Add Tags</Label>
                         <div className="flex items-center space-x-2 mt-1">
-                            {/* <Button variant="outline" size="icon" className="bg-[#3a3b6b]/50 border-[#4a4b7b] hover:bg-[#4a4b7b]/50">
-                                <Plus className="h-4 w-4" />
-                            </Button> */}
                             <Input value={tagsString} onChange={(val) => {
                                 const newTags = val.target.value.split(' ').filter(tag => tag.trim() !== '')
                                 setTags(newTags)
@@ -246,9 +230,6 @@ function Create({ setCreated }) {
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
-                                {/* <Button variant="outline" size="icon" className="rounded-full bg-white/10 hover:bg-white/20">
-                                    <Play className="h-6 w-6" />
-                                </Button> */}
                             </div>
                         </div>
                     </div>
@@ -256,8 +237,6 @@ function Create({ setCreated }) {
                     <div>
                         <Label>Tags:</Label>
                         <div className="flex flex-wrap gap-2 mt-1">
-                            {/* <Button variant="outline" className="rounded-full bg-[#3a3b6b]/50 border-[#4a4b7b] hover:bg-[#4a4b7b]/50">Tag 1</Button>
-                            <Button variant="outline" className="rounded-full bg-[#3a3b6b]/50 border-[#4a4b7b] hover:bg-[#4a4b7b]/50">Tag 2</Button> */}
                             {
                                 tags.map((tag, idx) => {
                                     return <Button key={idx} variant="outline" className="rounded-full bg-[#3a3b6b]/50 border-[#4a4b7b] hover:bg-[#4a4b7b]/50">{tag}</Button>

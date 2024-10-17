@@ -7,19 +7,20 @@ import { pinata } from '@/utils/config';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { data, tags, validation } = body;
-        console.log(data);
+        const { data, tags, validation, channelDetails } = body;
+        // console.log(body);
         if (!data || !validation || !tags || !Array.isArray(tags)) {
             return NextResponse.json({ error: 'Invalid data or tags' }, { status: 400 });
         }
 
-        const newLink = await storeLink(data as PlaylistItem | VideoEntity, tags, validation);
-        // const link = pinata.gateways.createSignedURL({
 
-        // })
+        // creating link
+        const newLink = await storeLink(data as PlaylistItem | VideoEntity, tags, validation, channelDetails);
+
         return NextResponse.json({ cuid: newLink }, { status: 201 });
     } catch (error) {
-        console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        // console.error(error.message);
+        // if(error.)
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
