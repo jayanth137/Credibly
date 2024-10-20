@@ -26,18 +26,18 @@ export default function Component() {
 
   return (
     <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full">
-      <main className="flex flex-col md:flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
+      <main className="flex flex-col items-start py-20 justify-evenly  lg:px-16 w-10/12 mx-auto z-10">
         <div
-          className="md:w-2/5 space-y-6 text-center md:text-left mb-8 md:mb-0 
+          className=" space-y-6 text-center  mb-8 
           transform opacity-0 translate-x-[-50px] animate-fadeInLeft delay-400ms"
         >
-          <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
+          <div className="flex items-center justify-center  space-x-3 mb-4">
             <Image src={logo} width={50} height={50} alt="logo" />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <h1 className="text-4xl  font-bold text-white">
               Credibily
             </h1>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+          <h2 className="text-2xl lg:text-4xl font-semibold leading-tight">
             Watch, Validate, and Mint
             <br />
             Your <span className='text-orange-600'>
@@ -45,7 +45,7 @@ export default function Component() {
             </span>
           </h2>
 
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center pt-4">
             <Button variant={'outline'} size={'lg'} className="text-white bg-transparent border-white border-2 text-lg px-6 py-4">
               Mint Certificate
             </Button>
@@ -61,10 +61,10 @@ export default function Component() {
           </div>
         </div>
         <div
-          className="md:w-2/5 relative 
+          className="relative 
           transform opacity-0 translate-x-[50px] animate-fadeInRight delay-600ms"
         >
-          <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
+          <div className="rounded-3xl p-4  mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
             <Image
               src={require('@/public/image 1.svg')}
               alt="Lion NFT"
@@ -72,7 +72,7 @@ export default function Component() {
             />
           </div>
           <div
-            className="absolute -bottom-8 -left-8 w-24 h-24 md:w-28 md:h-28 
+            className="absolute -bottom-8 -left-8 w-24 h-24 
             transform opacity-0 scale-0 animate-fadeInScale delay-800ms"
           >
             {/* <img
