@@ -1,5 +1,5 @@
 'use client';
-import '@/app/styles.css'
+import '@/app/styles.css';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import {
   coinbaseWallet,

@@ -18,8 +18,8 @@ interface MintProps {
   score: number;
   trueAnswer: number;
   badge: string;
-  title: string
-  author: string
+  title: string;
+  author: string;
 }
 
 const Mint = ({ score, trueAnswer, badge, title, author }: MintProps) => {
@@ -34,7 +34,7 @@ const Mint = ({ score, trueAnswer, badge, title, author }: MintProps) => {
 
   const uploadMetadata = async () => {
     const metadata = {
-      name: { title },
+      name: title,
       description: `This certificate is awarded for achieving a score of ${score} by watching the course of ${author}`,
       image:
         'https://ipfs.io/ipfs/QmXnW8kkd9QiJYx6ZCq3Bc6sCJF3M1nQ8fYjpLuSgSr9zm', // Example IPFS image

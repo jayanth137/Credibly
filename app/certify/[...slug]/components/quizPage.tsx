@@ -4,19 +4,21 @@ import QuizCard from '../../../components/User/quiz/QuizCard';
 // import { useRouter } from 'next/router';
 // import { useParams } from 'next/navigation';
 
-const page = ({ data }: {
+const page = ({
+  data,
+}: {
   data: {
-    author: string,
-    createdAt: string,
-    description: string,
-    id: string,
-    tags: string[],
-    thumbnail: string,
-    title: string,
-    validation: string,
-    updatedAt: string,
-    videoId: string
-  }
+    author: string;
+    createdAt: string;
+    description: string;
+    id: string;
+    tags: string[];
+    thumbnail: string;
+    title: string;
+    validation: string;
+    updatedAt: string;
+    videoId: string;
+  };
 }) => {
   // const { slug } = useParams();
   // const [error, setError] = useState<string>()
@@ -66,7 +68,7 @@ const page = ({ data }: {
     <div className="flex justify-center items-center m-auto">
       <QuizCard videoId={data.videoId} name={data.title} author={data.author} />
     </div>
-  )
+  );
 };
 
 export default page;

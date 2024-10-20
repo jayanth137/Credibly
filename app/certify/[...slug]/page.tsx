@@ -1,9 +1,9 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
-import { FC } from "react";
-import CoursePage from './components/coursePage'
-import QuizPage from './components/quizPage'
+import { PrismaClient } from '@prisma/client';
+import { FC } from 'react';
+import CoursePage from './components/coursePage';
+import QuizPage from './components/quizPage';
 
 // import { FC, useEffect, useState } from 'react';
 
@@ -55,43 +55,40 @@ export default async function page({ params }: { params: Params }) {
   //   }
   // }
   const { slug }: { slug: string[] } = params;
-  console.log(slug[1])
-  const prisma = new PrismaClient()
+  console.log(slug[1]);
+  const prisma = new PrismaClient();
 
   const cid = await prisma.videos.findUnique({
     where: {
       url_creatorId: {
         url: slug[1],
-        creatorId: `@${slug[0]}`
-      }
-    }
-  })
+        creatorId: `@${slug[0]}`,
+      },
+    },
+  });
+
+  console.log(cid);
   const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${cid?.cid}`);
 
-  console.log(ipfsResp)
+  console.log(ipfsResp);
 
   if (ipfsResp.status !== 200) {
     return (
       <div>
         <p>Invalid URL</p>
       </div>
-    )
+    );
   }
 
   // Parse the IPFS data
   const ipfsData = await ipfsResp.json();
   console.log('IPFS data:', ipfsData);
 
-
-
-  console.log(cid)
+  const creatorId = slug[0];
 
   if (slug.length <= 2) {
-    return <CoursePage data={ipfsData} />
+    return <CoursePage data={ipfsData} creatorId={{ creatorId }} />;
+  } else if (slug[2] == 'quiz') {
+    return <QuizPage data={ipfsData} />;
   }
-
-  else if (slug[2] == 'quiz') {
-    return <QuizPage data={ipfsData} />
-  }
-
-};
+}
