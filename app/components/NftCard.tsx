@@ -34,7 +34,7 @@ const NFTComponent = () => {
 
   useEffect(() => {
     const fetchNFTData = async () => {
-      const address = '0x576cf2f590Dc2A0E3a0883d7B63ca306D4Da2b6F';
+      if (!address) return;
       const contractAddress = '0xd2d5b17f9a0c65115a849ee0ced25f225bf53aca';
 
       try {
@@ -53,13 +53,13 @@ const NFTComponent = () => {
     };
 
     fetchNFTData();
-  }, []);
+  }, [address]);
 
   if (loading) return <p>Loading NFTs...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 px-40 py-12 items-center justify-evenly">
       {filteredNFTs.length > 0 ? (
         filteredNFTs.map((nft, index) => {
           // Initialize metadata with a default structure
@@ -85,9 +85,9 @@ const NFTComponent = () => {
               />
 
               {/* NFT Name */}
-              <div className="font-bold text-lg mb-2">
+              {/* <div className="font-bold text-lg mb-2">
                 {metadata.name || 'Unnamed NFT'}
-              </div>
+              </div> */}
 
               {/* NFT Description */}
               <p className="text-gray-700 text-sm mb-4">

@@ -1,12 +1,12 @@
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/common-evm-utils';
+import { NEXT_PUBLIC_MORALIS_API_KEY } from './config';
 
 // Initialize Moralis once and export it for reuse across your app
 export async function initializeMoralis() {
   try {
     await Moralis.start({
-      apiKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjhiMjNjMDhmLTYzOTQtNGNjMi04MDIxLWZlMGY1NzI0NTdjNiIsIm9yZ0lkIjoiNDEyNTg5IiwidXNlcklkIjoiNDIzOTk4IiwidHlwZUlkIjoiMTgxODRmYzMtZGY2MS00OTQzLWE0MGMtNzBhODE0OGVmMDBhIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3Mjk0MTc0MTYsImV4cCI6NDg4NTE3NzQxNn0.d3fxP2mNl244khjG3nMN-GN1yEvdhDGzRrX0oD-GfVQ',
+      apiKey: NEXT_PUBLIC_MORALIS_API_KEY,
     });
     console.log('Moralis initialized');
   } catch (e) {
