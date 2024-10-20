@@ -1,8 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import { Crown, Wallet } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Login from './components/Login';
@@ -27,13 +25,11 @@ export default function Component() {
   }
 
   return (
-    <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full ">
+    <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full">
       <main className="flex flex-col md:flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="md:w-2/5 space-y-6 text-center md:text-left mb-8 md:mb-0 "
+        <div
+          className="md:w-2/5 space-y-6 text-center md:text-left mb-8 md:mb-0 
+          transform opacity-0 translate-x-[-50px] animate-fadeInLeft delay-400ms"
         >
           <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
             <Image src={logo} width={50} height={50} alt="logo" />
@@ -49,7 +45,7 @@ export default function Component() {
             </span>
           </h2>
 
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4">
             <Button variant={'outline'} size={'lg'} className="text-white bg-transparent border-white border-2 text-lg px-6 py-4">
               Mint Certificate
             </Button>
@@ -63,12 +59,10 @@ export default function Component() {
               </Button>
             </Link>
           </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="md:w-2/5 relative"
+        </div>
+        <div
+          className="md:w-2/5 relative 
+          transform opacity-0 translate-x-[50px] animate-fadeInRight delay-600ms"
         >
           <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
             <Image
@@ -77,27 +71,23 @@ export default function Component() {
               className="w-full h-auto rounded-2xl rotate-[-5deg]"
             />
           </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute -bottom-8 -left-8 w-24 h-24 md:w-28 md:h-28"
+          <div
+            className="absolute -bottom-8 -left-8 w-24 h-24 md:w-28 md:h-28 
+            transform opacity-0 scale-0 animate-fadeInScale delay-800ms"
           >
             {/* <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s"
               alt="NFT Icon"
               className="w-full h-full object-cover"
             /> */}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </main>
-      <Image src={require('@/public/brain.svg')} alt='right bottom ' className='absolute bottom-0 right-0' />
+      <Image src={require('@/public/brain.svg')} alt='right bottom' className='absolute bottom-0 right-0' />
       <Image src={require('@/public/lines.svg')} alt='left bottom' className='absolute bottom-0 left-0 -z-10' />
       <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.25)_0%,rgba(222,231,233,0)_60%)] z-0 absolute -top-20 -left-20 rounded-full'>
-
       </div>
       {/* <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(222,231,233,0)_60%)] z-20 absolute bottom-0 right-20 rounded-full'>
-
       </div> */}
     </div>
   );
