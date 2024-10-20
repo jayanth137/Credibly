@@ -7,6 +7,9 @@ import { getCoursesByCreator } from '@/lib/getCoursesByCreator';
 import { google } from 'googleapis';
 import { NextRequest, NextResponse } from 'next/server';
 
+interface Course {
+  cid: string; // Assuming cid is a string, adjust if necessary
+}
 export async function POST(request: NextRequest) {
   // const accessToken = request.headers.get('Authorization')?.split(' ')[1];
   // // console.log(request.headers)
@@ -23,7 +26,7 @@ export async function POST(request: NextRequest) {
     // const channelDetails = await getChannelDetails(accessToken)
     const courses = await getCoursesByCreator(youtubeId);
     let courseData = await Promise.all(
-      courses.map(async (item) => {
+      courses.map(async (item: Course) => {
         const data = await fetchFromPinata(item.cid);
         return data;
       })
