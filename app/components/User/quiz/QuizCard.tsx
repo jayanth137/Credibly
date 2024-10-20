@@ -7,7 +7,15 @@ import TransactionWrapper from '../../Wallet/TransactionWrapper';
 import WalletWrapper from '../../Wallet/WalletWrapper';
 import Mint from '../../Mint';
 
-const QuizCard = ({ videoId, name, author }: { videoId: string, name: string, author: string }) => {
+const QuizCard = ({
+  videoId,
+  name,
+  author,
+}: {
+  videoId: string;
+  name: string;
+  author: string;
+}) => {
   const [quizData, setQuizData] = useState<any>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -86,9 +94,9 @@ const QuizCard = ({ videoId, name, author }: { videoId: string, name: string, au
     const badge = getBadge(percentage);
 
     return (
-      <section className="w-3/4 backdrop-blur-lg bg-white/20 rounded-lg border border-white/20 shadow-lg m-12 p-12">
-        <div className="h-screen bg-gradient-to-br from-[#1a1b3b] to-[#000031] text-white overflow-hidden flex justify-evenly items-center mt-12">
-          <div className="bg-slate-600 p-4 rounded-3xl space-y-6 ">
+      <section className="w-3/4 bg-black bg-opacity-20 rounded-xl shadow-lg m-12 p-8 ">
+        <div className="h-full text-white overflow-hidden flex justify-evenly items-center ">
+          <div className=" flex flex-col justify-evenly items-center p-4 rounded-3xl space-y-6 ">
             <img
               src={mrDuck.src}
               alt="mr duck"
@@ -162,12 +170,13 @@ const QuizCard = ({ videoId, name, author }: { videoId: string, name: string, au
       {currentQuestion.options.map((opt: string, i: number) => (
         <div
           key={i}
-          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${userAnswerForCurrent === opt
-            ? isCorrect
-              ? 'bg-green-100 text-green-800 border-green-600'
-              : 'bg-red-100 text-red-800 border-red-600'
-            : 'hover:bg-gray-200 text-black'
-            }`}
+          className={`flex items-center space-x-3 mb-5 text-black bg-white rounded-lg py-6 px-3 text-lg md:text-sm cursor-pointer ${
+            userAnswerForCurrent === opt
+              ? isCorrect
+                ? 'bg-green-100 text-green-800 border-green-600'
+                : 'bg-red-100 text-red-800 border-red-600'
+              : 'hover:bg-gray-200 text-black'
+          }`}
           onClick={() => handleClick(opt)}
           style={{ pointerEvents: userAnswerForCurrent ? 'none' : 'auto' }}
         >

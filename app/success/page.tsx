@@ -1,11 +1,11 @@
 import React from 'react';
-import Component from '../components/Bird';
+import Mint from '../components/Mint';
 
 const page = () => {
   return (
     <div>
       hello
-      <Component />
+      <Mint />
     </div>
   );
 };

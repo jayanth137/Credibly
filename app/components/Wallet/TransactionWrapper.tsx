@@ -16,6 +16,7 @@ import {
   mintABI,
   mintContractAddress,
 } from '../../constants';
+import { useRouter } from 'next/navigation';
 
 export default function TransactionWrapper({
   address,
@@ -24,11 +25,12 @@ export default function TransactionWrapper({
   address: Address;
   metadataUri: string;
 }) {
+  const router = useRouter();
   const contracts = [
     {
       address: mintContractAddress,
       abi: mintABI,
-      functionName: 'mintTo',
+      functionName: 'safeMint',
       args: [address, metadataUri],
     },
   ] as unknown as ContractFunctionParameters[];
@@ -43,6 +45,11 @@ export default function TransactionWrapper({
 
   const handleSuccess = (response: TransactionResponse) => {
     console.log('Transaction successful', response);
+    alert('NFT minted successfully!');
+
+    setTimeout(() => {
+      router.push('/success'); // Navigate to the success page
+    }, 5000);
   };
 
   return (
@@ -55,9 +62,9 @@ export default function TransactionWrapper({
         onSuccess={handleSuccess}
       >
         <TransactionButton className="mt-0 mr-auto ml-auto w-[450px] max-w-full text-[white] !text-xl" />
-        <TransactionStatus>
-          <TransactionStatusLabel />
-          <TransactionStatusAction />
+        <TransactionStatus className="text-white">
+          <TransactionStatusLabel className="text-white" />
+          <TransactionStatusAction className="text-white" />
         </TransactionStatus>
       </Transaction>
     </div>
