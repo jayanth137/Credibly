@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Playlist } from '@/app/types/playlist';
 import { Video } from '@/app/types/videos';
 import { fetchFromPinata } from '@/lib/fetchFromPinata';

@@ -1,13 +1,13 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { options } from './options'
+import { options } from './options';
 
-const handler = NextAuth(options)
+const handler = NextAuth(options);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
 // export const { GET, POST } = NextAuth({
 //     // pages: {
 //     //     signIn: '/login'
 //     // },
-    
+
 // });

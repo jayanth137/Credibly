@@ -28,7 +28,7 @@ import { storeLink } from '@/lib/storeLink';
 import Lottie from 'react-lottie';
 import Image from 'next/image';
 
-function Create({
+export default function Create({
   setCreated,
 }: {
   setCreated: React.Dispatch<React.SetStateAction<boolean>>;
@@ -364,5 +364,3 @@ function Create({
     </main>
   );
 }
-
-export default Create;
