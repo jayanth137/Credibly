@@ -48,7 +48,7 @@ export default function TransactionWrapper({
     alert('NFT minted successfully!');
 
     setTimeout(() => {
-      router.push('/success'); // Navigate to the success page
+      router.push('/nfts'); // Navigate to the success page
     }, 5000);
   };
 
