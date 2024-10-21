@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[4816],{7241:function(e,t,n){Promise.resolve().then(n.bind(n,73526))},73526:function(e,t,n){"use strict";n.r(t),t.default={src:"/_next/static/media/mrDuck.a0cdd9ef.svg",height:477,width:673,blurWidth:0,blurHeight:0}}},function(e){e.O(0,[2971,2117,1744],function(){return e(e.s=7241)}),_N_E=e.O()}]);

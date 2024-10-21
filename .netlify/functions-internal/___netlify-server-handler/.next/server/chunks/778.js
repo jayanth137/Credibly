@@ -1,0 +1,1 @@
+"use strict";exports.id=778,exports.ids=[778],exports.modules={80778:(e,t,r)=>{r.r(t),r.d(t,{default:()=>s});let s=(0,r(45347).createProxy)(String.raw`/Users/jayanthkoppala/Desktop/Developer/Credibly/app/components/Wallet/OnchainProviders.tsx#default`)}};

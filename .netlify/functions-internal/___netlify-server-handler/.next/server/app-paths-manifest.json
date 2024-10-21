@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/getCertification/route": "app/api/getCertification/route.js",
+  "/api/getQuestion/route": "app/api/getQuestion/route.js",
+  "/api/youtube/getVideos/route": "app/api/youtube/getVideos/route.js",
+  "/api/getCreatorData/route": "app/api/getCreatorData/route.js",
+  "/api/getDashboardData/route": "app/api/getDashboardData/route.js",
+  "/api/youtube/test/route": "app/api/youtube/test/route.js",
+  "/api/getLink/route": "app/api/getLink/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/create/page": "app/create/page.js",
+  "/creator/[slug]/page": "app/creator/[slug]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/certify/[...slug]/page": "app/certify/[...slug]/page.js",
+  "/scorePage/page": "app/scorePage/page.js",
+  "/pinataTest/page": "app/pinataTest/page.js",
+  "/test/[...url]/page": "app/test/[...url]/page.js",
+  "/success/page": "app/success/page.js",
+  "/nfts/page": "app/nfts/page.js",
+  "/page": "app/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js"
+}
