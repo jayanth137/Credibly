@@ -13,7 +13,7 @@ export default function LoginPage() {
       <main className="flex-grow flex items-center justify-center p-8">
         <div className=" rounded-lg overflow-hidden w-9/12  h-[70vh] flex justify-center items-center mx-auto">
           <div className="flex flex-row h-full">
-            <div className="hidden  w-2/3  p-8 pr-20 text-white">
+            <div className="  w-2/3  p-8 pr-20 text-white">
               <h2 className="text-5xl font-mono font-bold mb-4">
                 Monetize Your Knowledge with On-Chain Certificates
               </h2>
