@@ -1,3 +1,5 @@
+// @ts-ignore
+
 'use client';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
@@ -16,13 +18,10 @@ const queryClient = new QueryClient();
 function ModalPortal({ children }: Props) {
   // Ensure the modal renders at the top level of the DOM with a higher z-index
   return createPortal(
-    <div style={{ zIndex: 9999 }}>
-      {children}
-    </div>,
+    <div style={{ zIndex: 9999 }}>{children}</div>,
     document.body // Render it outside of the normal component tree
   );
 }
-
 
 function OnchainProviders({ children }: Props) {
   const wagmiConfig = useWagmiConfig();
@@ -30,7 +29,10 @@ function OnchainProviders({ children }: Props) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <OnchainKitProvider apiKey={NEXT_PUBLIC_CDP_API_KEY} chain={base}>
+        <OnchainKitProvider
+          apiKey={NEXT_PUBLIC_CDP_API_KEY}
+          chain={base as any}
+        >
           <ModalPortal>
             <RainbowKitProvider modalSize="compact">
               {children}

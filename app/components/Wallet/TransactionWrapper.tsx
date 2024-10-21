@@ -54,6 +54,7 @@ export default function TransactionWrapper({
 
   return (
     <div className="flex w-[450px]">
+      // @ts-ignore
       <Transaction
         contracts={contracts}
         className="w-[450px]"
