@@ -28,7 +28,7 @@ export default function Component() {
 
   return (
     <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full ">
-      <main className="flex flex-col md:flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
+      <main className="flex flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -44,13 +44,15 @@ export default function Component() {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
             Watch, Validate, and Mint
             <br />
-            Your <span className='text-orange-600'>
-              Success
-            </span>
+            Your <span className="text-orange-600">Success</span>
           </h2>
 
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
-            <Button variant={'outline'} size={'lg'} className="text-white bg-transparent border-white border-2 text-lg px-6 py-4">
+          <div className="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
+            <Button
+              variant={'outline'}
+              size={'lg'}
+              className="text-white bg-transparent border-white border-2 text-lg px-6 py-4"
+            >
               Mint Certificate
             </Button>
             <Link href={'/login'}>
@@ -91,11 +93,17 @@ export default function Component() {
           </motion.div>
         </motion.div>
       </main>
-      <Image src={require('@/public/brain.svg')} alt='right bottom ' className='absolute bottom-0 right-0' />
-      <Image src={require('@/public/lines.svg')} alt='left bottom' className='absolute bottom-0 left-0 -z-10' />
-      <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.25)_0%,rgba(222,231,233,0)_60%)] z-0 absolute -top-20 -left-20 rounded-full'>
-
-      </div>
+      <Image
+        src={require('@/public/brain.svg')}
+        alt="right bottom "
+        className="absolute bottom-0 right-0"
+      />
+      <Image
+        src={require('@/public/lines.svg')}
+        alt="left bottom"
+        className="absolute bottom-0 left-0 -z-10"
+      />
+      <div className="w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.25)_0%,rgba(222,231,233,0)_60%)] z-0 absolute -top-20 -left-20 rounded-full"></div>
       {/* <div className='w-[60rem] h-[60rem] bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(222,231,233,0)_60%)] z-20 absolute bottom-0 right-20 rounded-full'>
 
       </div> */}
