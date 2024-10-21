@@ -32,26 +32,26 @@ export default function Component() {
 
   return (
     <div className="h-[85vh] text-white overflow-hidden flex flex-col justify-center items-center mx-auto w-full ">
-      <main className="flex flex-row items-start py-20 justify-evenly md:px-8 lg:px-16 w-10/12 mx-auto z-10">
+      <main className="flex flex-row items-start py-20 justify-evenly px-16 w-10/12 mx-auto z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="w-2/5 space-y-6 text-center md:text-left mb-8 md:mb-0 "
         >
-          <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
+          <div className="flex items-center justify-start space-x-3 mb-4">
             <Image src={logo} width={50} height={50} alt="logo" />
             <h1 className="text-4xl md:text-5xl font-bold text-white">
               Credibily
             </h1>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+          <h2 className="text-3xl lg:text-4xl font-semibold leading-tight">
             Watch, Validate, and Mint
             <br />
             Your <span className="text-orange-600">Success</span>
           </h2>
 
-          <div className="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
+          <div className="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-start pt-4 ">
             <Button
               variant={'outline'}
               size={'lg'}
@@ -74,9 +74,9 @@ export default function Component() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="md:w-2/5 relative"
+          className="w-2/5 relative"
         >
-          <div className="rounded-3xl p-4 md:p-6 max-w-md mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
+          <div className="rounded-3xl p-6 max-w-md mx-auto bg-white/10 backdrop-blur-sm rotate-[5deg]">
             <Image
               src={require('@/public/image 1.svg')}
               alt="Lion NFT"
@@ -87,7 +87,7 @@ export default function Component() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute -bottom-8 -left-8 w-24 h-24 md:w-28 md:h-28"
+            className="absolute -bottom-8 -left-8 w-28 h-28"
           >
             {/* <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s"
