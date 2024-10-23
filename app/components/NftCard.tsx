@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import React, { useEffect, useState } from 'react';
 import { getFilteredNFTs } from '../moralis.mjs';
 import { useAccount } from 'wagmi';
@@ -26,15 +25,16 @@ interface NFT {
   verified_collection?: boolean;
 }
 
-const NFTComponent = () => {
+const NFTcard = () => {
   const [filteredNFTs, setFilteredNFTs] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   useEffect(() => {
     const fetchNFTData = async () => {
       if (!address) return;
+
       const contractAddress = '0xd2d5b17f9a0c65115a849ee0ced25f225bf53aca';
 
       try {
@@ -52,46 +52,68 @@ const NFTComponent = () => {
       }
     };
 
+    const loaderTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     fetchNFTData();
+
+    return () => clearTimeout(loaderTimeout);
   }, [address]);
 
   if (loading) return <Loader />;
-  if (error) return <PopUp message={error} onClose={() => setError(null)} />;
+  if (error) return <PopUp message={error} label="Oops Error" onClose={() => setError(null)} />;
+  if (!isConnected) return <NoNFTsFound walletError />;
 
   return (
-    <div className="px-40 py-12 items-center justify-evenly">
+    <div className="px-40 items-center justify-evenly gap-6">
       {filteredNFTs.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-          {filteredNFTs.map((nft, index) => {
-            let metadata: NFTMetadata = {};
-            try {
-              if (nft.metadata) {
-                metadata = JSON.parse(nft.metadata);
+        <>
+          <h1 className="text-4xl font-bold font-serif text-center text-white mb-8">
+            User Achievements
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            {filteredNFTs.map((nft, index) => {
+              let metadata: NFTMetadata = {};
+              try {
+                if (nft.metadata) {
+                  metadata = JSON.parse(nft.metadata);
+                }
+              } catch (error) {
+                console.error('Error parsing metadata:', error);
               }
-            } catch (error) {
-              console.error('Error parsing metadata:', error);
-            }
-
-            return (
-              <div key={index} className="max-w-xs rounded-lg overflow-hidden shadow-md bg-white p-4">
-                <img className="w-full h-48 object-cover mb-4" src={metadata.image || 'placeholder-image-url'} alt={metadata.name || 'NFT Image'} />
-                <p className="text-gray-700 text-sm mb-4">{metadata.description || 'No description available'}</p>
-                <div className="text-sm">
-                  {metadata.attributes && metadata.attributes.length > 0 ? (
-                    metadata.attributes.map((attribute, index) => (
-                      <div key={index} className="text-xs mb-1">
-                        <span className="font-semibold">{attribute.trait_type}:{' '}</span>
-                        {attribute.value || 'N/A'}
-                      </div>
-                    ))
-                  ) : (
-                    <p>No attributes available</p>
-                  )}
+              return (
+                <div
+                  key={index}
+                  className="max-w-xs rounded-lg overflow-hidden shadow-md bg-white p-4"
+                >
+                  <img
+                    className="w-full h-48 object-cover mb-4"
+                    src={metadata.image || 'placeholder-image-url'}
+                    alt={metadata.name || 'NFT Image'}
+                  />
+                  <p className="text-gray-700 text-sm mb-4">
+                    {metadata.description || 'No description available'}
+                  </p>
+                  <div className="text-sm">
+                    {metadata.attributes && metadata.attributes.length > 0 ? (
+                      metadata.attributes.map((attribute, index) => (
+                        <div key={index} className="text-xs mb-1">
+                          <span className="font-semibold">
+                            {attribute.trait_type}:{' '}
+                          </span>
+                          {attribute.value || 'N/A'}
+                        </div>
+                      ))
+                    ) : (
+                      <p>No attributes available</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
         <NoNFTsFound />
       )}
@@ -99,4 +121,4 @@ const NFTComponent = () => {
   );
 };
 
-export default NFTComponent;
+export default NFTcard;

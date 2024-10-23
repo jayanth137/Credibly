@@ -155,7 +155,7 @@ Learners can explore courses created by YouTube content creators. They can compl
 
 Content creators can manage their courses, view learner statistics, and configure their YouTube videos as full courses using our platform.
 
-**[Explore the live creator courses page](https://credibly.vercel.app/creator/@jayanthkoppala2168)**.
+**[Explore the live creator courses page](https://credibly.vercel.app/creator/jayanthkoppala2168)**.
 
 ## ✍️ Authors <a name="authors"></a>
 
