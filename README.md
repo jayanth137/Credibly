@@ -24,6 +24,8 @@
 - [Setting up a Local Environment](#setting-up-a-local-environment)
 - [Technology Stack](#technology-stack)
 - [Dependencies / Limitations](#dependencies--limitations)
+- [Course Page for Users](#course-page-for-users)
+- [Creator Courses Page](#creator-courses-page)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 
@@ -142,6 +144,18 @@ Your app should be running on [http://localhost:3000](http://localhost:3000).
 - AI-generated quizzes are currently limited to MCQ format.
 - Limited customization options for certificates at this stage.
 - Dependency on YouTube for transcript extraction could be limited by video format or availability.
+
+## 🌐 Course Page for Users <a name="course-page-for-users"></a>
+
+Learners can explore courses created by YouTube content creators. They can complete a quiz based on the video content and, if they meet the criteria, mint a certificate as proof of learning.
+
+**[Experience a live course page](https://credibly.vercel.app/certify/jayanthkoppala2168/How_to_Build_a_Blockchain_Enterprise_Platform_Demo_Video)**.
+
+## 🌐 Creator Courses Page <a name="creator-courses-page"></a>
+
+Content creators can manage their courses, view learner statistics, and configure their YouTube videos as full courses using our platform.
+
+**[Explore the live creator courses page](https://credibly.vercel.app/creator/@jayanthkoppala2168)**.
 
 ## ✍️ Authors <a name="authors"></a>
 
