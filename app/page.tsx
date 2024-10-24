@@ -48,13 +48,15 @@ export default function Component() {
           </h2>
 
           <div className="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start pt-4 ">
-            <Button
-              variant={'outline'}
-              size={'lg'}
-              className="text-white bg-transparent border-white border-2 text-lg px-6 py-4"
-            >
-              Mint Certificate
-            </Button>
+            <Link href={'/nfts'}>
+              <Button
+                variant={'outline'}
+                size={'lg'}
+                className="text-white bg-transparent border-white border-2 text-lg px-6 py-4"
+              >
+                Mint Certificate
+              </Button>
+            </Link>
             <Link href={'/login'}>
               <Button
                 variant="default"

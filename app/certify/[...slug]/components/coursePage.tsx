@@ -97,7 +97,7 @@ export default function Page({
                       </p>
                     </div>
                   </div>
-                  <Link href={`/creator/@${creatorId}`}>
+                  <Link href={`/creator/${creatorId}`}>
                     <div className="flex backdrop-blur-lg gap-4 bg-white/10 rounded-lg border border-white/20 shadow-lg p-2">
                       <Avatar className="w-12 h-12">
                         <AvatarImage

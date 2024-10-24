@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 function ModalPortal({ children }: Props) {
   // Ensure the modal renders at the top level of the DOM with a higher z-index
   return createPortal(
-    <div style={{ zIndex: 9999 }}>{children}</div>,
+    <div >{children}</div>,
     document.body // Render it outside of the normal component tree
   );
 }
