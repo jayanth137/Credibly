@@ -54,6 +54,7 @@ export default async function CoursePage() {
     // ]
     const prisma = new PrismaClient()
     const courses = await prisma.videos.findMany()
+    const creators = await prisma.creator.findMany()
     return (
         <div className="min-h-screen text-white">
             <main className="p-4 md:p-6 space-y-6">
@@ -69,7 +70,7 @@ export default async function CoursePage() {
                                 className="w-full object-cover"
                             />
                             <div className="p-4 space-y-2">
-                                <h3 className="font-semibold line-clamp-2">{course.description.slice(0, 20) + '...'}</h3>
+                                <h3 className="font-semibold line-clamp-2">{course.description.slice(0, 100) + '...'}</h3>
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center space-x-1">
                                         {Array.from({ length: 5 }).map((_, index) => (
@@ -82,6 +83,9 @@ export default async function CoursePage() {
                                             />
                                         ))}
                                         <span className="text-sm">4.5</span>
+                                    </div>
+                                    <div className="flex">
+                                        Creator: {creators.find(creator => creator.youtubeId == course.creatorId).name}
                                     </div>
                                     {/* <span className="text-sm">+{course.enrolled.toLocaleString()} Enrolled</span> */}
                                 </div>
