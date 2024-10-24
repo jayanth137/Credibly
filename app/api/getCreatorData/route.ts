@@ -18,21 +18,8 @@ export async function POST(request: NextRequest) {
 
   youtubeId = '@' + youtubeId;
   try {
-    // const uploads = await getUploadsId(accessToken)
-    // const channelDetails = await getChannelDetails(accessToken)
-    const courses: Array<{ cid: string }> = await getCoursesByCreator(
-      youtubeId
-    );
-    let courseData = await Promise.all(
-      courses.map(async (item: { cid: string }) => {
-        const data = await fetchFromPinata(item.cid);
-        return data;
-      })
-    );
-
+    const courseData = await getCoursesByCreator(youtubeId)
     const description = await fetchChannelDescription(youtubeId);
-    // const videos = await getUploadedVideos(channelDetails.uploads)
-    // const playlists = await getPlaylists(accessToken)
 
     return NextResponse.json({
       courseData: courseData,

@@ -16,6 +16,8 @@ import Lottie from 'react-lottie';
 import { Pay, PayButton, PayStatus } from '@coinbase/onchainkit/pay';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { Videos, Creator } from '@prisma/client';
+
 
 interface Params {
   slug: string;
@@ -23,23 +25,10 @@ interface Params {
 
 export default function Page({
   data,
-  creatorId,
+  creator,
 }: {
-  data: {
-    author: string;
-    createdAt: string;
-    description: string;
-    id: string;
-    tags: string[];
-    thumbnail: string;
-    title: string;
-    validation: string;
-    updatedAt: string;
-    videoId: string;
-  };
-  creatorId: {
-    creatorId: string;
-  };
+  data: Videos,
+  creator: Creator
 }) {
   const pathname = usePathname();
   const [origin, setOrigin] = useState<string>();
@@ -97,7 +86,7 @@ export default function Page({
                       </p>
                     </div>
                   </div>
-                  <Link href={`/creator/${creatorId}`}>
+                  <Link href={`/creator/${creator.youtubeId.slice(1)}`}>
                     <div className="flex backdrop-blur-lg gap-4 bg-white/10 rounded-lg border border-white/20 shadow-lg p-2">
                       <Avatar className="w-12 h-12">
                         <AvatarImage
@@ -107,7 +96,7 @@ export default function Page({
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div className="flex items-center">
-                        <p className="text-white">{data.author}</p>
+                        <p className="text-white">{creator.name}</p>
                       </div>
                     </div>
                   </Link>
@@ -142,9 +131,9 @@ export default function Page({
 
               {/* New Section: Redirect to Creator's Page */}
               <div className="mt-6">
-                <Link href={`/creator/@${creatorId}`}>
+                <Link href={`/creator/${creator.youtubeId.slice(1)}`}>
                   <button className="w-full bg-black p-2 rounded-lg text-white hover:bg-black-700">
-                    View More Courses by {data.author}
+                    View More Courses by {creator.name}
                   </button>
                 </Link>
               </div>

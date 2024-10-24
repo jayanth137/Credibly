@@ -12,53 +12,11 @@ interface Params {
 }
 
 export default async function page({ params }: { params: Params }) {
-  // console.log(slug)
-  // const [data, setData] = useState<{
-  //   author: string;
-  //   createdAt: string;
-  //   description: string;
-  //   id: string;
-  //   tags: string[];
-  //   thumbnail: string;
-  //   title: string;
-  //   validation: string;
-  //   updatedAt: string;
-  //   videoId: string;
-  // }>();
-  // const [origin, setOrigin] = useState<string>();
-  // const [error, setError] = useState<string>();
-  // const [copied, setCopied] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   fetchCertification();
-  //   setOrigin(window.location.origin);
-  // }, [slug]);
-  // async function fetchCertification() {
-  //   try {
-  //     // Use the slug as the CID to fetch data from IPFS
-  //     // const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${slug}`);
-
-  //     if (ipfsResp.status !== 200) {
-  //       setError('Failed to fetch data from IPFS');
-  //       return;
-  //     }
-
-  //     // Parse the IPFS data
-  //     const ipfsData = await ipfsResp.json();
-  //     console.log('IPFS data:', ipfsData);
-
-  //     // Set the data to state
-  //     setData(ipfsData);
-  //   } catch (err) {
-  //     setError('Failed to fetch certification data.');
-  //     console.error('Error fetching certification:', err);
-  //   }
-  // }
   const { slug }: { slug: string[] } = params;
   console.log(slug[1]);
   const prisma = new PrismaClient();
 
-  const cid = await prisma.videos.findUnique({
+  const course = await prisma.videos.findUnique({
     where: {
       url_creatorId: {
         url: slug[1],
@@ -66,13 +24,14 @@ export default async function page({ params }: { params: Params }) {
       },
     },
   });
+  const creator = await prisma.creator.findUnique({
+    where: {
+      youtubeId: `@${slug[0]}`,
+    }
+  })
+  console.log(creator)
 
-  console.log(cid);
-  const ipfsResp = await fetch(`https://gateway.pinata.cloud/ipfs/${cid?.cid}`);
-
-  console.log(ipfsResp);
-
-  if (ipfsResp.status !== 200) {
+  if (!course) {
     return (
       <div>
         <p>Invalid URL</p>
@@ -80,15 +39,11 @@ export default async function page({ params }: { params: Params }) {
     );
   }
 
-  // Parse the IPFS data
-  const ipfsData = await ipfsResp.json();
-  console.log('IPFS data:', ipfsData);
-
   const creatorId = slug[0];
 
   if (slug.length <= 2) {
-    return <CoursePage data={ipfsData} creatorId={{ creatorId }} />;
+    return <CoursePage data={course} creator={creator} />;
   } else if (slug[2] == 'quiz') {
-    return <QuizPage data={ipfsData} />;
+    return <QuizPage data={course} creator={creator} />;
   }
 }

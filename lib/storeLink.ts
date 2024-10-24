@@ -2,6 +2,7 @@
 import { PlaylistItem } from '@/app/types/playlist';
 import { VideoEntity } from '@/app/types/videos';
 import { PrismaClient } from '@prisma/client';
+import { json } from 'stream/consumers';
 
 export async function storeLink(
   data: PlaylistItem | VideoEntity,
@@ -38,16 +39,6 @@ export async function storeLink(
     type: itemtype,
   };
 
-  // Prepare headers for Pinata API
-  const pinataApiKey = '73c879f180b698a69faa';
-  const pinataSecretApiKey =
-    '0a8396a79ee46480d58adb68a8e6aa202fa8ed27e9795a9a5527e0e26d8b8ed0';
-
-  const headers = {
-    'Content-Type': 'application/json',
-    pinata_api_key: pinataApiKey!,
-    pinata_secret_api_key: pinataSecretApiKey!,
-  };
   const url = data.snippet.title.replaceAll(/\s/g, '_');
 
   try {
@@ -65,33 +56,6 @@ export async function storeLink(
       return videoExists.creatorId.slice(1) + '/' + videoExists.url;
     }
 
-    // Make a POST request directly to Pinata's JSON upload endpoint
-    const response = await fetch(
-      'https://api.pinata.cloud/pinning/pinJSONToIPFS',
-      {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(jsonData),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Failed to upload data to Pinata');
-    }
-
-    const result = await response.json();
-    // console.log('Upload successful:', result);
-
-    const cid = result.IpfsHash;
-
-    // const resp = await prisma.creator.create({
-    //     data: {
-    //         name: channelDetails.name as string,
-    //         youtubeId: channelDetails.youtubeId as string,
-    //     }
-    // })
-
-    // console.log('channel details: ', channelDetails)
     const creator = await prisma.creator.findUnique({
       where: {
         youtubeId: channelDetails.youtubeId,
@@ -109,12 +73,18 @@ export async function storeLink(
 
     const video = await prisma.videos.create({
       data: {
-        cid: cid,
+        videoId: jsonData.videoId,
         url: url,
+        description: jsonData.description,
+        tags: jsonData.tags,
+        title: jsonData.title,
+        thumbnail: jsonData.thumbnail,
+        validation: jsonData.validation,
+        type: jsonData.type,
         creatorId: channelDetails.youtubeId,
       },
     });
-    console.log(video);
+    // console.log(video);
 
     return video.creatorId.slice(1) + '/' + video.url;
     // Pinata returns the CID in IpfsHash
